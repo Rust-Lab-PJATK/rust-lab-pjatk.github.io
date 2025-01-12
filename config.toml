@@ -24,7 +24,6 @@ favicon_emoji = "🦀"
 menu = [
   { name = "blog", url = "blog" },
   { name = "archive", url = "archiwum" },
-  { name = "tags", url = "tagi" },
   { name = "projects", url = "projekty" },
 ]
 
