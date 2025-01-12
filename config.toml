@@ -1,0 +1,35 @@
+# The URL the site will be built for
+base_url = "https://Rust-Lab-PJATK.github.io"
+title = "Rust Lab PJATK"
+theme = "tabi"
+default_language = "pl"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = true
+highlight_theme = "css"
+
+[extra]
+# Put all your custom variables here
+skin = "pjatk"
+browser_theme_color = "#e30613"
+favicon_emoji = "🦀"
+menu = [
+  { name = "blog", url = "blog" },
+  { name = "archive", url = "archiwum" },
+  { name = "tags", url = "tagi" },
+  { name = "projects", url = "projekty" },
+]
+
+socials = [
+  { name = "email", url = "mailto:rustlab@pjwstk.edu.pl", icon = "email" },
+  { name = "github", url = "https://github.com/Rust-Lab-PJATK", icon = "github" },
+  { name = "linkedin", url = "https://www.linkedin.com/company/rust-lab-pjatk", icon = "linkedin" },
+]

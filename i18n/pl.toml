@@ -1,0 +1,95 @@
+language_name = "Polski"  # Shown in language picker for multi-language sites.
+date_locale = "pl_PL"
+full_stop = "."  # Used at the end of a sentence.
+
+# Menu items.
+# Should match the names in config.extra.menu and config.extra.footer_menu.
+blog = "Blog"
+archive = "Archiwum"
+tags = "Tagi"
+projects = "Projekty"
+about = "O nas"
+contact = "Kontakt"
+privacy = "Polityka prywatności"
+site_statistics = "Statystyki strony"
+sitemap = "Mapa strony"
+
+# Search.
+search = "Wyszukaj"
+search_icon_title = "Kliknij lub wciśniej $SHORTCUT by otworzyć wyszukiwarkę"  # $SHORTCUT will be replaced with the actual keyboard shortcut.
+clear_search = "Wyczyść wyszukiwanie"  # Title of the X icon next to search input.
+zero_results = "Brak wyników"
+one_results = "$NUMBER wynik"  # "1 result"
+many_results = "Wyniki: $NUMBER"  # "3 results"
+
+# Navigation.
+pinned = "Przypięte"
+jump_to_posts = "Przejdź do wpisów"
+read_more = "Przeczytaj więcej"
+one_posts = "$NUMBER wpis"
+many_posts = "Wpisy: $NUMBER"  # "3 posts"
+prev = "Poprzednia strona"  # As in "Previous" page.
+next = "Następna strona"  # As in "Next" page.
+of = "z"  # E.g. Page 1 "of" 3
+all_posts = "Wszystkie wpisy"
+all_tags = "Wszystkie tagi"
+all_projects = "Wszystkie projekty"
+featured_projects = "Wyróżnione projekty"
+language_selection = "Wybór języka"
+toggle_mode = "Przełącz $MODE motyw"  # $MODE will be replaced by a value (or both) below.
+dark = "ciemny"
+light = "jasny"
+reset_mode = "Przywróć domyślny motyw"
+
+# Quick navigation buttons.
+toggle_toc = "Przełącz spis treść"
+go_to_top = "Przejdź na początek strony"
+go_to_comments = "Przejdź do sekcji komentarzy"
+
+# Post metadata.
+by_author = "Autorzy: $AUTHOR"  # $AUTHOR will be replaced by the author(s).
+author_separator = ", "  # For multiple authors. Ensure spacing where necessary.
+author_conjunction = " i "  # For multiple authors. Ensure spacing where necessary.
+draft = "WERSJA ROBOCZA"
+zero_min_read = "<1 minuta czytania"
+one_min_read = "$NUMBER minuta czytania"
+many_min_read = "Czas czytania (w minutach): $NUMBER"
+zero_words = "Brak słów"
+one_words = "$NUMBER słowo"
+many_words = "Słowa: $NUMBER"
+last_updated_on = "Data ostatniej aktualizacji: $DATE"
+see_changes = "See changes"
+
+# Post body.
+table_of_contents = "Spis treści"
+load_comments = "Wczytaj komentarze"
+
+# Copy code block button.
+copied = "Skopiowano!"
+copy_code_to_clipboard = "Skopiuj kod do schowka"
+
+# Footer: Powered by Zola and tabi.
+powered_by = "Strona oparta na oprogramowaniu"
+and = "i"
+site_source = "Kod źródłowy strony"
+
+# 404 error.
+# https://welpo.github.io/tabi/404.html
+page_missing = "Strona, której szukasz nie istnieje"
+translation_missing = "lub nie została jeszcze przetłumaczona na twój język"
+check_url = "Sprawdź, czy adres URL zawiera błędy albo"
+go_home = "wróć na stronę główną"
+
+# For multilingual quote shortcode.
+# https://welpo.github.io/tabi/blog/shortcodes/#multilingual-quotes
+show_original_quote = "Pokaż oryginalny cytat"
+show_translation = "Pokaż tłumaczenie"
+open_quotation_mark = "“"
+close_quotation_mark = "”"
+
+# Translations for stylised Atom feed.
+# https://welpo.github.io/tabi/atom.xml
+# Must contain "About Feeds"; it will become a link.
+about_feeds = "Oto kanał RSS, znany również jako kanał Atom. Subskrybuj poprzez skopiowanie adresu URL z górnego paska i wklejenie do twojego czytnika wiadomości. Odwiedź stronę About Feeds by dowiedzieć się więcej. Subskrypcja jest bezpłatna."
+visit_the_site = "Odwiedź stronę"
+recent_posts = "Ostatnie wpisy"
