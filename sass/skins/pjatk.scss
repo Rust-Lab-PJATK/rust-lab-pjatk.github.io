@@ -7,7 +7,7 @@
 
   @else if $theme =='dark' {
     // Dark theme colours.
-    --primary-color: #f7424e; // Contrast ratio: 11.06:1
+    --primary-color: #fa4954; // Contrast ratio: 11.06:1
   }
 }
 
@@ -33,6 +33,10 @@
   }
 }
 
+a {
+  text-decoration: underline;
+}
+
 a:hover {
   color: #fff;
   background-color: var(--primary-color);
@@ -53,4 +57,13 @@ a:hover {
     width: 100%;
     max-width: none;
   }
+}
+
+pre code::before {
+  background-color: var(--bg-3);
+  color: var(--text-color);
+}
+
+.copy-code {
+  background-color: var(--text-color);
 }
