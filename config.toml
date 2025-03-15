@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://Rust-Lab-PJATK.github.io"
+base_url = "https://rust-lab-pjatk.github.io"
 title = "Rust Lab PJATK"
 theme = "tabi"
 default_language = "pl"
@@ -21,14 +21,19 @@ highlight_theme = "css"
 skin = "pjatk"
 browser_theme_color = "#e30613"
 favicon_emoji = "🦀"
+toc = true
+quick_navigation_buttons = true
+show_author = true
+katex = true
+mermaid = true
 menu = [
   { name = "blog", url = "blog" },
   { name = "archive", url = "archiwum" },
   { name = "projects", url = "projekty" },
 ]
-
 socials = [
   { name = "email", url = "mailto:rustlab@pjwstk.edu.pl", icon = "email" },
   { name = "github", url = "https://github.com/Rust-Lab-PJATK", icon = "github" },
   { name = "linkedin", url = "https://www.linkedin.com/company/rust-lab-pjatk", icon = "linkedin" },
 ]
+copyright = "© $CURRENT_YEAR Rust Lab PJATK $SEPARATOR Tekst na tej stronie jest udostępniany na licencji [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), chyba że wskazano inaczej."
