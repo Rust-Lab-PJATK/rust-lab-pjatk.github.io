@@ -24,14 +24,14 @@ many_results = "Wyniki: $NUMBER"  # "3 results"
 
 # Navigation.
 pinned = "Przypięte"
-jump_to_posts = "Przejdź do wpisów"
-read_more = "Przeczytaj więcej"
+jump_to_posts = "Przejdź do artykułów"
+read_more = "Przejdź do artykułu"
 one_posts = "$NUMBER wpis"
 many_posts = "Wpisy: $NUMBER"  # "3 posts"
 prev = "Poprzednia strona"  # As in "Previous" page.
 next = "Następna strona"  # As in "Next" page.
 of = "z"  # E.g. Page 1 "of" 3
-all_posts = "Wszystkie wpisy"
+all_posts = "Wszystkie artykuły"
 all_tags = "Wszystkie tagi"
 all_projects = "Wszystkie projekty"
 featured_projects = "Wyróżnione projekty"
@@ -92,4 +92,4 @@ close_quotation_mark = "”"
 # Must contain "About Feeds"; it will become a link.
 about_feeds = "Oto kanał RSS, znany również jako kanał Atom. Subskrybuj poprzez skopiowanie adresu URL z górnego paska i wklejenie do twojego czytnika wiadomości. Odwiedź stronę About Feeds by dowiedzieć się więcej. Subskrypcja jest bezpłatna."
 visit_the_site = "Odwiedź stronę"
-recent_posts = "Ostatnie wpisy"
+recent_posts = "Ostatnie artykuły"
