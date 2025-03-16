@@ -123,7 +123,7 @@ for mut stream in listener.incoming().flatten() {
 
 Pomimo tego, że wykonujemy sprawdzenie równości obecnej liczby aktywnych wątków i ich maksymalnej dopuszczalnej liczby, zarówno uruchamianie jak i kolejkowanie wątków odbywa się poprzez wywołanie [metody `execute()` puli wątków](https://docs.rs/threadpool/1.8.1/threadpool/struct.ThreadPool.html#method.execute). Pula zadba o uruchomienie pierwszego w kolejce wątku kiedy inny wątek zakończy pracę.
 
-Ponieważ będziemy odwoływać się wewnątrz wątku do obiektu `stream`, należy pamiętać o umieszczeniu słowa kluczowego `move` przed definicją domknięcia. Istnieje szansa, że wątek _poboczny_ będzie aktywny dłużej niż ten, który powołał go uruchomił, stąd też wymagane jest, by wszelkie dane używane w nowym wątku miały czas życia równy `'static`, czyli żeby były dostępne aż do końca działania wątku.
+Ponieważ będziemy odwoływać się wewnątrz wątku do obiektu `stream`, należy pamiętać o umieszczeniu słowa kluczowego `move` przed definicją domknięcia. Istnieje bowiem szansa, że wątek _poboczny_ będzie aktywny dłużej niż ten, który go uruchomił, stąd też wymagane jest, by wszelkie dane używane w nowym wątku miały czas życia równy `'static`, czyli żeby były dostępne aż do końca działania wątku.
 
 Domyślnie `stream` zostałby jedynie pożyczony, a skoro nie mamy gwarancji, że jego czas życia będzie co najmniej równy czasowi trwania wątku, to przy próbie użycia `stream` w domknięciu bez `move`, otrzymamy [błąd kompilacji](https://doc.rust-lang.org/error_codes/E0373.html). Zatem domknięcie musi przejąć `stream` na własność w celu spełnienia powyższego wymagania.
 
