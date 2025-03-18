@@ -24,7 +24,7 @@ Wprowadziłem dwie drobne zmiany:
 1. Serwer nasłuchuje na porcie numer **31415**, ponieważ największy możliwy numer portu TCP wynosi 65535 (wybór portu 314159 był najpewniej niedopatrzeniem ze strony autora oryginalnego dokumentu).
 2. [...] serwer wysyła kolejne cyfry liczby &pi; (w celu zmniejszenia obciążenia sieci) [...], począwszy od **cyfry jedności** [...], gdyż ułatwia to implementację oraz wytłumaczenie działania zastosowanego przeze mnie algorytmu.
 
-Specyfikacja nie narzuca konkretnej metody generowania cyfr. Choć mógłbym wykorzystać plik z [milionem uprzednio obliczonych cyfr](http://newton.ex.ac.uk/research/qsystems/collabs/pi/pi6.txt) i wysyłać jego zawartość, takie rozwiązanie byłoby zbyt proste i mało interesujące. Co więcej, nie spełnia ono potrzeb klientów żądnych miliona jeden, miliona dwóch, czy miliona trzech pierwszych cyfr (o milionie czterech nie wspominając).
+Specyfikacja nie narzuca konkretnej metody generowania cyfr. Choć mógłbym wykorzystać [plik z milionem cyfr](http://newton.ex.ac.uk/research/qsystems/collabs/pi/pi6.txt) i wysyłać jego zawartość, takie rozwiązanie byłoby zbyt proste i mało interesujące. Co więcej, nie spełnia ono potrzeb klientów żądnych miliona jeden, miliona dwóch, czy miliona trzech pierwszych cyfr (o milionie czterech nie wspominając).
 
 ## Algorytm na obliczanie kolejnych cyfr liczby pi
 
@@ -56,23 +56,23 @@ Zanim przejdziemy do _części praktycznej_ tego artykułu, musimy jeszcze porus
 
 Pierwszą z nich jest obsługa wielu klientów jednocześnie. Ponieważ mamy do czynienia z usługą, która kładzie większy nacisk na moc obliczeniową serwera niż przepustowość sieci, zdecydowałem się na wykorzystanie tradycyjnych wątków systemowych zamiast modelu `async/await`.
 
-Oczywiście, tworzenie nowego wątku za każdym razem gdy zostanie nawiązane połączenie to prosty przepis na nieszczęście. Wystarczy, że ktoś uruchomi skrypt, który w nieskończonej pętli będzie otwierał nowe połączenia, żeby nasz nie tylko nasz program, ale też całe urządzenie padło na kolana.
+Oczywiście, tworzenie nowego wątku za każdym razem gdy zostanie nawiązane połączenie to prosty przepis na nieszczęście. Wystarczy, że ktoś uruchomi skrypt, który w nieskończonej pętli będzie otwierał nowe połączenia, żeby nie tylko nasz program, ale też całe urządzenie padło na kolana.
 
 Bardziej rozsądnym podejściem jest tworzenie ograniczonej liczby wątków do obsługi połączeń. W przypadku gdy zostanie ona osiągnięta, a nowy klient będzie chciał nawiązać z nami połączenie, wystarczy go poinformować o pełnym obciążeniu i zakolejkować jego żądanie. Kiedy inny klient się rozłączy, będziemy mogli wówczas obsłużyć klienta oczekującego w kolejce.
 
-Choć mógłbym się pokusić o napisanie [własnego mechanizmu puli wątków](https://buraksekili.github.io/articles/thread-pooling-rs), postanowiłem sięgnąć po [bibliotekę `threadpool`](https://crates.io/crates/threadpool), by skupić się na wcześniej opisanym algorytmie. Skoro już o nim znów mowa, czas przejść do drugiego problemu.
+Choć mógłbym się pokusić o napisanie [własnego mechanizmu puli wątków](https://buraksekili.github.io/articles/thread-pooling-rs), postanowiłem sięgnąć po [bibliotekę `threadpool`](https://crates.io/crates/threadpool), by skupić się na wcześniej opisanym algorytmie. Skoro znów o nim mowa, czas przejść do drugiego problemu.
 
 ### `rug` - duże liczby całkowite
 
-Podstawowe typy liczb całkowitych dostępnych w języku Rust mają ograniczoną pojemność. W zdecydowanej większości problemów ich zakres jest wystarczająco duży by przechowywać dane i wykonywać na nich obliczenia nie obawiając się o przekroczenie maksymalnej dopuszczalnej wartości.
+Podstawowe typy liczb całkowitych w języku Rust mają pojemność ograniczoną do konkretnej liczby bajtów. Dla zdecydowanej większości programów dany zakres jest wystarczająco duży by przechowywać dane i wykonywać na nich obliczenia bez obaw o przekroczenie maksymalnej dopuszczalnej wartości.
 
 Niestety, nawet 64-bitowa liczba całkowita bez znaku (która potrafi zmieścić [ponad 18 trylionów](https://doc.rust-lang.org/std/primitive.u64.html#associatedconstant.MAX)), okazuje się dla użytego przeze mnie algorytmu zbyt mała do obliczenia... dziesiątej cyfry po przecinku. Nic jednak dziwnego, gdyż ten algorytm został napisany z myślą o języku ABC, którego typ liczby całkowitej ma (teoretycznie) nieograniczoną pojemność.
 
-Mało tego, w niektórych językach _głównego nurtu_ takich jak [Python](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) czy [Ruby](https://ruby-doc.com/docs/ProgrammingRuby/html/tut_stdtypes.html), liczby całkowite również są (lub mogą być w razie potrzeby) przechowywane w pamięci jako duża liczba całkowita. Z kolei w językach pokroju [Javy](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) albo [C#'a](https://learn.microsoft.com/pl-pl/dotnet/api/system.numerics.biginteger?view=net-9.0), dostępny jest oddzielny typ do reprezentowania _nieskończenie wielkich_ liczb całkowitych.
+Mało tego, w niektórych językach _głównego nurtu_ takich jak [Python](https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex) czy [Ruby](https://ruby-doc.com/docs/ProgrammingRuby/html/tut_stdtypes.html), liczby całkowite również są (lub mogą być w razie potrzeby) przechowywane w formie potrafiącej pomieścić dowolnie dużą wartość. Z kolei w językach pokroju [Javy](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) albo [C#'a](https://learn.microsoft.com/pl-pl/dotnet/api/system.numerics.biginteger?view=net-9.0), dostępny jest oddzielny typ do reprezentowania _nieskończenie wielkich_ liczb całkowitych.
 
-O ile Rust nie posiada wbudowanego w język rozwiązania w stylu ostatnich dwóch ze wspomnianych w poprzednim akapicie języków, tak na ratunek przychodzi społeczność z [biblioteką `rug`](https://crates.io/crates/rug), która dostarcza ona wysokopoziomowy interfejs programistyczny dla [GNU Multiple Precision Arithmetic Library](https://gmplib.org).
+O ile Rust nie posiada wbudowanego w język rozwiązania w stylu ostatnich dwóch ze wcześniej wspomnianych języków, tak na ratunek przychodzi społeczność z [biblioteką `rug`](https://crates.io/crates/rug), która dostarcza wysokopoziomowy interfejs programistyczny dla [GNU Multiple Precision Arithmetic Library](https://gmplib.org).
 
-Skrzynka `rug` jest udostępniana na licencji [GNU **Lesser** General Public License v3](https://www.gnu.org/licenses/lgpl-3.0.en.html), co powinno ułatwić jej integrację z komercyjnymi projektami. Jeśli mimo to jej licencja jest nadal niekompatybilna z takiego czy innego powodu, polecam zapoznać się z zamiennikiem w postaci [biblioteki `num-bigint`](https://lib.rs/crates/num-bigint).
+Skrzynka `rug` jest udostępniana na licencji [GNU **Lesser** General Public License v3](https://www.gnu.org/licenses/lgpl-3.0.en.html), co powinno ułatwić jej integrację z komercyjnymi projektami. Jeśli mimo to jej licencja nadal jest nieodpowiednia, polecam zapoznać się z zamiennikiem w postaci [biblioteki `num-bigint`](https://lib.rs/crates/num-bigint).
 
 ## Analiza kodu
 
@@ -99,7 +99,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 Wykorzystałem [alternatywną sygnaturę funkcji `main`](https://doc.rust-lang.org/rust-by-example/error/result.html#using-result-in-main), aby móc posługiwać się [operatorem `?`](https://doc.rust-lang.org/rust-by-example/std/result/question_mark.html) do wyłuskiwania pomyślnych wyników zamiast potencjalnie panikujących wywołań [`unwrap()`](https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap). W razie wystąpienia wyjątku, ten zostanie wyświetlony w postaci [`Debug`](https://doc.rust-lang.org/std/fmt/trait.Debug.html), a proces zakończy się z kodem błędu. Natomiast podstawienie [`Box<dyn Error>`](https://doc.rust-lang.org/std/boxed/index.html) jako spodziewany typ błędu umożliwia zwracanie obiektu dowolnego typu, pod warunkiem że implementuje [cechę `Error`](https://doc.rust-lang.org/std/error/trait.Error.html).
 
-Co do liczby wątków w puli, 5 nie jest w żaden sposób wiążącą czy najbardziej optymalną liczbą. Można dowolnie eksperymentować z jej zwiększaniem lub zmniejszaniem w zależności od wymaganej liczby klientów to równoległego obsługiwania oraz mocy obliczeniowej serwera.
+Co do liczby wątków w puli, 5 nie jest w żaden sposób wiążącą czy najbardziej optymalną liczbą. Można dowolnie eksperymentować z jej zwiększaniem lub zmniejszaniem w zależności od wymaganej liczby klientów do równoległego obsługiwania oraz mocy obliczeniowej serwera.
 
 ### Nasłuchiwanie połączeń i uruchamianie/kolejkowanie wątków
 
@@ -123,9 +123,9 @@ for mut stream in listener.incoming().flatten() {
 
 Pomimo tego, że wykonujemy sprawdzenie równości obecnej liczby aktywnych wątków i ich maksymalnej dopuszczalnej liczby, zarówno uruchamianie jak i kolejkowanie wątków odbywa się poprzez wywołanie [metody `execute()` puli wątków](https://docs.rs/threadpool/1.8.1/threadpool/struct.ThreadPool.html#method.execute). Pula zadba o uruchomienie pierwszego w kolejce wątku kiedy inny wątek zakończy pracę.
 
-Ponieważ będziemy odwoływać się wewnątrz wątku do obiektu `stream`, należy pamiętać o umieszczeniu słowa kluczowego `move` przed definicją domknięcia. Istnieje bowiem szansa, że wątek _poboczny_ będzie aktywny dłużej niż ten, który go uruchomił, stąd też wymagane jest, by wszelkie dane używane w nowym wątku miały czas życia równy `'static`, czyli żeby były dostępne aż do końca działania wątku.
+Ponieważ będziemy odwoływać się wewnątrz wątku do obiektu `stream`, należy pamiętać o umieszczeniu słowa kluczowego `move` przed definicją domknięcia. Istnieje bowiem szansa, że wątek _poboczny_ będzie aktywny dłużej niż ten, który go uruchomił. Stąd też wymagane jest, by wszelkie dane używane w nowym wątku miały czas życia równy `'static`, czyli żeby były dostępne aż do końca działania wątku.
 
-Domyślnie `stream` zostałby jedynie pożyczony, a skoro nie mamy gwarancji, że jego czas życia będzie co najmniej równy czasowi trwania wątku, to przy próbie użycia `stream` w domknięciu bez `move`, otrzymamy [błąd kompilacji](https://doc.rust-lang.org/error_codes/E0373.html). Zatem domknięcie musi przejąć `stream` na własność w celu spełnienia powyższego wymagania.
+Domyślnie `stream` zostałby jedynie pożyczony, a skoro nie mamy gwarancji, że jego czas życia będzie co najmniej równy czasowi trwania wątku, to przy próbie użycia `stream` w domknięciu bez `move` otrzymamy [błąd kompilacji](https://doc.rust-lang.org/error_codes/E0373.html). Zatem domknięcie musi przejąć `stream` na własność w celu spełnienia powyższego wymagania.
 
 ### Implementacja algorytmu na obliczanie kolejnych cyfr pi
 
@@ -162,7 +162,7 @@ Warto zwrócić uwagę chociażby na formę deklaracji zmiennych `p` i `q` oraz 
 
 Takie zachowanie pozwala zmniejszyć liczbę kosztownych operacji alokacji pamięci wykonywanych przez te obiekty, chociażby poprzez przypisywanie tych wyników do istniejących obiektów z pomocą przeciążonych operatorów albo [metody `assign()`](https://docs.rs/rug/1.27.0/rug/struct.Integer.html#impl-Assign-for-Integer). Jeśli jednak nie ma innego wyjścia niż utworzenie nowej liczby typu `Integer`, to możemy przekazać wynik do `Integer::from` tak samo jak robiliśmy to ze _zwykłymi_ liczbami.
 
-Zostało nam już tylko wyciąganie i porównywanie kolejnych cyfr z rozwinięć dziesiętnych przybliżeń &pi; Jesli cyfra na danej pozycji jest taka sama dla obu ułamków, możemy ją wysłać do klienta. W razie gdy jej przesłanie się nie powiedzie (najpewniej z powodu zerwania połączenia przez klienta), przerywamy pętlę `'pi` i tym samym kończymy wątek. Jeśli cyfry się różnią, to oznacza, że czas obliczenie kolejnego przybliżenia &pi;.
+Zostało nam już tylko wyciąganie i porównywanie kolejnych cyfr z rozwinięć dziesiętnych przybliżeń &pi; Jesli cyfra na danej pozycji jest taka sama dla obu ułamków, możemy ją wysłać do klienta. W razie gdy jej przesłanie się nie powiedzie (najpewniej z powodu zerwania połączenia przez klienta), przerywamy pętlę `'pi` i tym samym kończymy wątek. Jeśli cyfry się różnią, to oznacza, że czas na obliczenie kolejnego przybliżenia &pi;.
 
 ```rust
 let mut d = Integer::from(&a / &b);
