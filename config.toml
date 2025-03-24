@@ -36,4 +36,4 @@ socials = [
   { name = "github", url = "https://github.com/Rust-Lab-PJATK", icon = "github" },
   { name = "linkedin", url = "https://www.linkedin.com/company/rust-lab-pjatk", icon = "linkedin" },
 ]
-copyright = "© $CURRENT_YEAR Rust Lab PJATK $SEPARATOR Tekst na tej stronie jest udostępniany na licencji [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), chyba że wskazano inaczej."
+copyright = "© $CURRENT_YEAR Rust Lab PJATK $SEPARATOR Artykuły na tej stronie są udostępniane na licencji [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0)."
