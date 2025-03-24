@@ -2,12 +2,12 @@
 @mixin theme-variables($theme) {
   @if $theme =='light' {
     // Light theme colours.
-    --primary-color: #e30613; // Contrast ratio: 4.73:1
+    --primary-color: #e30613;
   }
 
   @else if $theme =='dark' {
     // Dark theme colours.
-    --primary-color: #fa4954; // Contrast ratio: 11.06:1
+    --primary-color: #ff6771;
   }
 }
 
@@ -38,17 +38,16 @@ a {
 }
 
 a:hover {
-  color: #fff;
   background-color: var(--primary-color);
 }
 
 ::selection {
-  color: #fff;
   background-color: var(--primary-color);
 }
 
 #banner-container-home #image-container-home {
   padding-inline-start: 4rem;
+  max-width: 12rem;
 }
 
 @media only screen and (max-width: 600px) {
