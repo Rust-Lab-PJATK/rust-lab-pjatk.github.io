@@ -3,8 +3,10 @@ title = "Konsolowy program do steganografii obrazowej - część 1"
 draft = true
 date = 2025-03-23
 description = ""
-tags = ["miniprojekt", "poradnik", "steganografia"]
 authors = ["Maciej Pędzich"]
+
+[taxonomies]
+tags = ["miniprojekt", "cli", "steganografia"]
 +++
 
 ## Czym jest steganografia?

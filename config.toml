@@ -3,6 +3,7 @@ base_url = "https://rust-lab-pjatk.github.io"
 title = "Rust Lab PJATK"
 theme = "tabi"
 default_language = "pl"
+taxonomies = [{ name = "tags", feed = true }]
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -29,8 +30,8 @@ katex = true
 mermaid = true
 menu = [
   { name = "blog", url = "blog" },
+  { name = "tags", url = "tags" },
   { name = "archive", url = "archiwum" },
-  { name = "projects", url = "projekty" },
 ]
 socials = [
   { name = "email", url = "mailto:rustlab@pjwstk.edu.pl", icon = "email" },

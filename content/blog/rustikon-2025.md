@@ -2,8 +2,10 @@
 title = "Rustikon 2025"
 date = 2025-04-02
 description = "Relacja z naszego udziału w pierwszej w Polsce konferencji poświęconej językowi Rust."
-tags = ["relacja", "rustikon", "konferencja"]
 authors = ["Maciej Pędzich"]
+
+[taxonomies]
+tags = ["relacja", "rustikon", "konferencja"]
 +++
 
 ## Nasza reprezentacja
