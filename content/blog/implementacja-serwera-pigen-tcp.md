@@ -2,7 +2,7 @@
 title = "Implementacja serwera usługi Pigen na bazie protokołu TCP"
 date = 2025-03-15
 description = "Dowiedz się jak napisać wielowątkowy serwer obliczający kolejne cyfry liczby pi, wykorzystując protokół TCP i biblioteki do obsługi puli wątków oraz dużych liczb całkowitych."
-tags = ["miniprojekt", "net", "pi"]
+tags = ["miniprojekt", "sieci"]
 authors = ["Maciej Pędzich"]
 +++
 
