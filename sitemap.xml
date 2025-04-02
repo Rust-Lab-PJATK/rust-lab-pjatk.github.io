@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="https://rust-lab-pjatk.github.io/sitemap_style.xsl" type="text/xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/archiwum/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/blog/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/</loc>
+        <lastmod>2025-03-15</lastmod>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/blog/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/blog/rustikon-2025/</loc>
+        <lastmod>2025-04-02</lastmod>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/projekty/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/tags/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/tags/konferencja/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/tags/miniprojekt/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/tags/relacja/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/tags/rustikon/</loc>
+    </url>
+    <url>
+        <loc>https://rust-lab-pjatk.github.io/tags/sieci/</loc>
+    </url>
+</urlset>

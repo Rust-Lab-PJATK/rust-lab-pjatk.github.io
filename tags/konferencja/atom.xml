@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="https://rust-lab-pjatk.github.io/feed_style.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="pl">
+    <tabi:metadata xmlns:tabi="https://github.com/welpo/tabi">
+        <tabi:base_url>https:&#x2F;&#x2F;rust-lab-pjatk.github.io</tabi:base_url>
+        <tabi:separator>
+            •
+        </tabi:separator>
+        <tabi:about_feeds>Oto kanał RSS, znany również jako kanał Atom. Subskrybuj poprzez skopiowanie adresu URL z górnego paska i wklejenie do twojego czytnika wiadomości. Odwiedź stronę About Feeds by dowiedzieć się więcej. Subskrypcja jest bezpłatna.</tabi:about_feeds>
+        <tabi:visit_the_site>Odwiedź stronę</tabi:visit_the_site>
+        <tabi:recent_posts>Ostatnie artykuły</tabi:recent_posts>
+        <tabi:last_updated_on>Data ostatniej aktualizacji: $DATE</tabi:last_updated_on>
+        <tabi:default_theme></tabi:default_theme>
+        <tabi:post_listing_date>date</tabi:post_listing_date>
+        <tabi:current_section>konferencja</tabi:current_section>
+    </tabi:metadata><link rel="extra-stylesheet" href="https://rust-lab-pjatk.github.io/skins/pjatk.css?h=14166792eb0b5e4e3507" /><title>Rust Lab PJATK - konferencja</title>
+    <link href="https://rust-lab-pjatk.github.io/tags/konferencja/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://rust-lab-pjatk.github.io/tags/konferencja/" rel="alternate" type="text/html"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2025-04-02T00:00:00+00:00</updated>
+    <id>https://rust-lab-pjatk.github.io/tags/konferencja/atom.xml</id><entry xml:lang="pl">
+        <title>Rustikon 2025</title>
+        <published>2025-04-02T00:00:00+00:00</published>
+        <updated>2025-04-02T00:00:00+00:00</updated>
+        <author>
+            <name>Maciej Pędzich</name>
+        </author>
+        <link rel="alternate" href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/" type="text/html"/>
+        <id>https://rust-lab-pjatk.github.io/blog/rustikon-2025/</id>
+        <summary type="html">Relacja z naszego udziału w pierwszej w Polsce konferencji poświęconej językowi Rust.</summary>
+        </entry>
+</feed>
