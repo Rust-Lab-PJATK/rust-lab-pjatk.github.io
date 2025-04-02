@@ -26,7 +26,7 @@ W skład naszej reprezentacji (na zdjęciu powyżej) weszli:
 
 Ze stoisk sponsorskich najciekawsze było naszym zdaniem stoisko samego organizatora konferencji, [firmy SoftwareMill](https://softwaremill.com), która przygotowała koło fortuny z pytaniami dotyczącymi języka Rust i jego ekosystemu.
 
-Każda poprawna odpowiedź mogła zostać nagrodzona drobynm upominkiem, a cała seria dobrych odpowiedzi nawet uroczą dzierganą maskotką Ferrisa. Spodobała nam się ona do tego stopnia, że każdy z nas zgarnął po jednym takim krabie.
+Każda poprawna odpowiedź mogła zostać nagrodzona drobynm upominkiem, w tym dzierganą maskotką Ferrisa. Spodobała nam się ona do tego stopnia, że każdy z nas zgarnął po jednym takim krabie.
 
 <img
   src="/img/rustikon-2025/ferris.jpg"
