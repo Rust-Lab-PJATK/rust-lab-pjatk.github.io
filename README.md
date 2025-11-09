@@ -65,3 +65,38 @@ Polecenie buduje stronę w trybie developerskim i udostępnia ją pod adresem `h
    - Wyślij zmiany w osobnej gałęzi, opisz krótko nowy wpis i poproś o review.
 
 Po wdrożeniu wpis pojawi się automatycznie w blogu oraz na stronie archiwum (`/archiwum/`), zgodnie z datą publikacji i przypisanymi tagami.
+
+## Docker
+
+Poniżej znajdziesz przykładowe kroki budowania obrazu Docker, który generuje stronę za pomocą Zola podczas etapu build i serwuje ją przez Nginx.
+
+- Domyślna komenda buduje używając pliku konfiguracyjnego `config.toml` (domyślnie ustawionego w `Dockerfile`):
+
+```bash
+docker build -t rustlab-page:latest .
+```
+
+- Aby użyć innego pliku konfiguracyjnego przekaż go jako build-arg `ZOLA_CONFIG`:
+
+```bash
+docker build --build-arg ZOLA_CONFIG=some-other-config.toml -t rustlab-page:latest .
+```
+
+- Uwaga dotycząca motywu (`themes/tabi`): motyw jest dołączony jako submodule Git. Upewnij się, że submoduły zostały zainicjalizowane przed budowaniem obrazu (w przeciwnym razie Zola nie znajdzie `theme.toml` i build zakończy się niepowodzeniem):
+
+```bash
+# jeśli już sklonowałeś repozytorium
+git submodule update --init --recursive
+
+# lub przy klonowaniu
+git clone --recurse-submodules <repo-url>
+```
+
+- Po zbudowaniu obrazu możesz go uruchomić lokalnie i przekierować port 80 kontenera na inny port hosta:
+
+```bash
+docker run --rm -p 8080:80 rustlab-page:latest
+# potem odwiedź http://localhost:8080
+```
+
+W środowiskach CI/CD pamiętaj, by klonować repozykotorium z submodułami lub wykonać `git submodule update --init --recursive` przed etapem budowania obrazu.

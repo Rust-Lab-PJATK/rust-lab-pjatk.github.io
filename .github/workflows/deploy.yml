@@ -11,4 +11,5 @@ jobs:
         uses: shalzz/zola-deploy-action@master
         env:
           PAGES_BRANCH: gh-pages
+          ZOLA_CONFIG: config.github.toml
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
