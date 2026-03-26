@@ -91,6 +91,8 @@ Każdy z nas wrócił z nieco innymi wrażeniami. Oto jak Rustikon 2026 podsumow
 
 ### Łukasz Wiszniewski
 
+> Uważam Rustikon 2026 za bardzo udane wydarzenie. Świetni prelegenci i doskonała okazja do networkingu z ekspertami z branży. Dla mnie absolutnym hitem była prelekcja Mateusza Lenarta 'Getting hired in Rust: Recruiter's perspective'. Zobaczyłem, jak trudnym wyzwaniem jest rekrutacja w tym ekosystemie z punktu widzenia rekrutera, który musi weryfikować bardzo 'kreatywne' CV. W zabawny, choć nieco gorzki sposób przedstawił on realia rynku w 2026 roku, gdzie każdy deklaruje w papierach 'doświadczenie z Rustem', ale niekoniecznie potrafi wyjaśnić, czym w ogóle jest borrow checker.
+
 ## Podsumowanie
 
 Druga edycja Rustikonu utwierdziła nas w przekonaniu, że społeczność Rusta w Polsce rozwija się w niesamowitym tempie. Były to dwa dni pełne świetnych technicznych prelekcji, inspirujących rozmów w kuluarach i dzielenia się pasją z innymi inżynierami. Wyjechaliśmy z nową wiedzą i jeszcze większą motywacją do działania.
