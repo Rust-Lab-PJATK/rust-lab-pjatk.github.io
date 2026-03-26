@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pl" >
+
+<head>
+    <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy"
+content="default-src 'self';font-src &#x27;self&#x27; data: 'self';img-src &#x27;self&#x27; https:&#x2F;&#x2F;* data:;media-src &#x27;self&#x27;;style-src &#x27;self&#x27; 'unsafe-inline';frame-src player.vimeo.com https:&#x2F;&#x2F;www.youtube-nocookie.com;connect-src 'self';script-src 'self' 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https://rust-lab-pjatk.github.io">
+
+    
+    <title>Rust Lab PJATK • Rustikon 2026</title>
+
+    
+    
+    
+        <link rel=icon href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="central" text-anchor="middle" font-size="88">🦀</text></svg>'>
+    
+
+    
+    
+
+    
+    
+    
+        
+            <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/custom_subset.css?h=0b9535a28bc3d5bf2321">
+        
+    
+
+    
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/main.css?h=5761abda13287149cf75" />
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/skins/pjatk.css?h=14166792eb0b5e4e3507" />
+
+    <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#e30613" />
+        <meta name="description" content="Relacja z naszego drugiego udziału w konferencji Rustikon." />
+        <meta property="og:description" content="Relacja z naszego drugiego udziału w konferencji Rustikon." />
+
+    
+
+    <meta property="og:title" content="Rustikon 2026" />
+    <meta property="og:type" content="article" />
+
+    
+<meta property="og:locale" content="pl_PL" />
+
+    <meta property="og:url" content="https:&#x2F;&#x2F;rust-lab-pjatk.github.io&#x2F;blog&#x2F;rustikon-2026&#x2F;" /><meta property="og:site_name" content="Rust Lab PJATK">
+        <noscript><link rel="stylesheet" href="https://rust-lab-pjatk.github.io/no_js.css"/></noscript>
+        <script type="text/javascript" src="https://rust-lab-pjatk.github.io/js/initializeTheme.min.js"></script>
+        <script defer src="https://rust-lab-pjatk.github.io/js/themeSwitcher.min.js"></script></head>
+
+
+<body>
+    <header>
+    <nav class="navbar">
+        <div class="nav-title">
+            <a class="home-title" href="https://rust-lab-pjatk.github.io">Rust Lab PJATK</a>
+        </div>
+            <div class="nav-navs">
+                <ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/blog/">Blog
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/tags/">Tagi
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/archiwum/">Archiwum
+                                </a>
+                            </li>
+                        <li class="menu-icons-container">
+                        <ul class="menu-icons-group">
+                            
+
+                            
+                            
+
+                            <li class="theme-switcher-wrapper js"><div
+        title="Przełącz ciemny&#x2F;jasny motyw"
+        class="theme-switcher"
+        tabindex="0"
+        role="button"
+        aria-label="Przełącz ciemny motyw"
+        aria-pressed="false">
+    </div><div
+        title="Przywróć domyślny motyw"
+        class="theme-resetter arrow"
+        tabindex="0"
+        role="button"
+        aria-hidden="true"
+        aria-label="Przywróć domyślny motyw">
+    </div>
+
+</li>
+</ul>
+                    </li>
+                </ul>
+            </div>
+        
+    </nav>
+</header>
+
+    <div class="content">
+
+        
+        
+
+
+
+
+<main>
+    <article>
+        <h1 class="article-title">
+            Rustikon 2026
+        </h1>
+
+        <ul class="meta"><li>Autorzy: Daniel Olczyk</li>
+                <li><span class='separator' aria-hidden='true'>•</span>25 mar 2026</li><li title="Słowa: 1193"><span class='separator' aria-hidden='true'>•</span>Czas czytania (w minutach): 6</li><li class="tag"><span class='separator' aria-hidden='true'>•</span>Tagi:&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/relacja/">relacja</a>,&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/rustikon/">rustikon</a>,&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/konferencja/">konferencja</a></li>
+        </ul>
+            
+
+<div class="toc-container">
+    
+        <h3>Spis treści</h3>
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#nasza-reprezentacja">Nasza reprezentacja</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#pierwszy-dzien-konferencji">Pierwszy dzień konferencji</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#drugi-dzien-konferencji">Drugi dzień konferencji</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#stanowiska-sponsorskie-partnerskie">Stanowiska sponsorskie&#x2F;partnerskie</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#opinie-czlonkow-kola">Opinie członków koła</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#daniel-olczyk">Daniel Olczyk</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#borys-piwonski">Borys Piwoński</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#zuzanna-koscielniak">Zuzanna Kościelniak</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#lukasz-wiszniewski">Łukasz Wiszniewski</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#podsumowanie">Podsumowanie</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+        
+
+        <section class="body"><p>W dniu od 19-20 marca w <a href="https://polin.pl/pl/centrum-konferencyjne">Centrum Konferencyjnym POLIN w Warszawie</a> mieliśmy przyjemność uczestniczyć oraz jednocześnie być partnerem wydarzenia drugiej edycji konferencji <a href="https://www.rustikon.dev/">Rustikon</a> przez firmę <a href="https://softwaremill.com">SoftwareMill</a>, która ponownie odbyła się w Warszawie. Wydarzenie to zgromadziło entuzjastów języka Rust z całego świata, oferując bogaty program prelekcji, warsztatów i paneli dyskusyjnych. Łącznie można było usłyszeć 22 prelekcje, które poruszały różnorodne tematy związane z Rustem, od optymalizacji kodu, przez budowanie sieci neuronowych, aż po praktyczne zastosowania w różnych dziedzinach.</p>
+<h2 id="nasza-reprezentacja"><a class="header-anchor no-hover-padding" href="#nasza-reprezentacja" aria-label="Anchor link for: nasza-reprezentacja"><span class="link-icon" aria-hidden="true"></span></a>
+Nasza reprezentacja</h2>
+<p><img src="/img/rustikon-2026/my.jpg" alt="Nasza reprezentacja" /></p>
+<p>W tym roku naszą reprezentację stanowili (od dołu - od lewej do prawej):</p>
+<ul>
+<li><a href="https://www.linkedin.com/in/daniel-olczyk/?locale=pl">Daniel Olczyk</a></li>
+<li><a href="https://www.linkedin.com/in/bor-piw/">Borys Piwoński</a></li>
+<li><a href="https://www.linkedin.com/in/kawieki/">Łukasz Wiszniewski</a></li>
+<li><a href="https://www.linkedin.com/in/zuzanna-koscielniak-ba875a243/">Zuzanna Kościelniak</a></li>
+</ul>
+<h2 id="pierwszy-dzien-konferencji"><a class="header-anchor no-hover-padding" href="#pierwszy-dzien-konferencji" aria-label="Anchor link for: pierwszy-dzien-konferencji"><span class="link-icon" aria-hidden="true"></span></a>
+Pierwszy dzień konferencji</h2>
+<p>Pierwszy dzień obfitował w prelekcje o najnowszych trendach w ekosystemie Rusta. Otwarcie okazało się sporym (i bardzo pozytywnym!) zaskoczeniem. Andre Bogus, jeden z kontrybutorów Rusta, nawiązał do swojego zeszłorocznego występu z ukulele, tym razem rozgrzewając publiczność parodią hitu <a href="https://www.youtube.com/watch?v=-tJYN-eG1zk">Queen</a> – własnym utworem <em>"We Will Rust You"</em>.</p>
+<p><img src="/img/rustikon-2026/andre-bogus-lecture.jpg" alt="Andre Bogus na scenie podczas prelekcji" /></p>
+<p>W części merytorycznej Andre prześledził ewolucję swojej implementacji <code>Option::as_slice</code> i <code>Option::as_mut_slice</code>. Zobaczyliśmy, z jakimi wyzwaniami musiał się zmierzyć na przestrzeni czasu. Była to świetna i pouczająca lekcja o tym, jak ważne jest ciągłe refaktoryzowanie kodu i dostosowywanie go do wymagań języka.</p>
+<p><img src="/img/rustikon-2026/pawel-szulc-lecture.jpg" alt="Paweł Szulc na scenie podczas prelekcji" /></p>
+<p>Zdecydowanymi faworytami pierwszego dnia były dla nas dwie prelekcje:</p>
+<ul>
+<li><em>"Are mutexes slow?"</em> – Jon Gjengset</li>
+<li><em>"From Micrograd to coppergrad: Building Neural Networks and Backpropagation from Scratch in Rust"</em> – Paweł Szulc</li>
+</ul>
+<p>Zdecydowanie się nie zawiedliśmy. Oba wystąpienia były naszpikowane merytoryczną wiedzą i dostarczyły nam mnóstwa inspiracji – zarówno w kontekście zarządzania wydajnością i optymalizacji w Ruście, jak i tworzenia sieci neuronowych od zupełnych podstaw.</p>
+<h2 id="drugi-dzien-konferencji"><a class="header-anchor no-hover-padding" href="#drugi-dzien-konferencji" aria-label="Anchor link for: drugi-dzien-konferencji"><span class="link-icon" aria-hidden="true"></span></a>
+Drugi dzień konferencji</h2>
+<p>Drugi dzień od samego rana trzymał wysoki poziom. Rozpoczęliśmy od prelekcji Mateusza Charytoniuka <em>"Building a self-hosted LLM ecosystem in Rust: from infrastructure to applications"</em>, która świetnie naświetliła proces budowania infrastruktury dla modeli językowych. Zaraz potem duet Mateusz Maćkowski i Marek Grzelak w prezentacji <em>"The Unglamorous Side of Rust Web Development"</em> bez owijania w bawełnę opowiedział o bolączkach i wyzwaniach związanych z tworzeniem aplikacji webowych w tym języku.</p>
+<p><img src="/img/rustikon-2026/cotrs-lecture.jpg" alt="Mateusz Maćkowski i Marek Grzelak na scenie podczas prelekcji" /></p>
+<p>Bardzo praktycznym punktem programu było wystąpienie Marcina Kulika – <em>"Let's build an async runtime together"</em>. Prelegent rozłożył na czynniki pierwsze tworzenie własnego środowiska asynchronicznego. Pozwoliło to świetnie zrozumieć mechanikę działania istniejących runtime'ów i poznać kluczowe elementy tej układanki.</p>
+<p>Ciekawym spojrzeniem z zewnątrz była prelekcja Mateusza Lenarta <em>"Getting hired in Rust - Recruiter's perspective"</em>. Obiegowa opinia głosi, że Rust to głównie blockchain, jednak dane rekrutacyjne pokazują coś innego. To pozytywne zaskoczenie udowadnia, że zapotrzebowanie na "Rustowców" w klasycznym wytwarzaniu oprogramowania stabilnie rośnie.</p>
+<p>Mocnym akcentem na zakończenie były dwie świetne prezentacje techniczne:</p>
+<p><img src="/img/rustikon-2026/vitaly-bragilevsky-lecture.jpg" alt="Vitaly Brigilevsky na scenie podczas prelekcji" /></p>
+<ul>
+<li><em>"Beyond println!: Mastering Rust Debugging"</em> – Vitaly Bragilevsky (szef działu Rust w <a href="https://www.jetbrains.com/">JetBrains</a>) pokazał zaawansowane możliwości debugowania w nowym IDE RustRover, udowadniając jego przewagę nad standardowym zestawem z rust-analyzerem.</li>
+<li><em>"Channels in Rust: The Art of Concurrency"</em> – Gaurav Gahlot zaprezentował, jak elegancko i efektywnie wykorzystywać kanały do zarządzania współbieżnością i komunikacją między wątkami.</li>
+</ul>
+<h2 id="stanowiska-sponsorskie-partnerskie"><a class="header-anchor no-hover-padding" href="#stanowiska-sponsorskie-partnerskie" aria-label="Anchor link for: stanowiska-sponsorskie-partnerskie"><span class="link-icon" aria-hidden="true"></span></a>
+Stanowiska sponsorskie/partnerskie</h2>
+<p>Rustikon to nie tylko scena, ale też kuluarowe rozmowy. Strefa stoisk sponsorskich i partnerskich pękała w szwach, stwarzając idealne warunki do networkingu, rozmów o ścieżkach kariery i poznawania nowych narzędzi.</p>
+<p>Zaczęliśmy od stoiska głównego organizatora, firmy <a href="https://softwaremill.com">SoftwareMill</a>. Można było tam zgarnąć świetne gadżety (duże kubki, koszulki, wlepki) oraz świetnego dzierganego Ferrisa – choć w tym roku poprzeczka pytań konkursowych była zawieszona znacznie wyżej!</p>
+<p>Odwiedziliśmy również <a href="https://www.exein.io/">Exein</a>, gdzie dyskutowaliśmy o bezpieczeństwie w obszarach IoT i Embedded, a także stoisko <a href="https://superteam.fun/">SuperTeam Poland</a>. Tam dowiedzieliśmy się sporo o grantach na projekty w ekosystemie Solany oraz o nadchodzącym hackathonie, w którym zresztą wzięliśmy później udział.</p>
+<p><img src="/img/rustikon-2026/fanty.jpg" alt="Fanty, które udało się otrzymać ze stanowisk" /></p>
+<p>Na sam koniec zostawiliśmy absolutną perełkę - stoisko firmy <a href="https://helsing.ai/de">Helsing</a>. Następnego dnia zorganizowali oni fascynujące wyzwanie polegające na programowaniu ruchu samochodów po wyznaczonych krawędziach, gdzie kluczową rolę odgrywały algorytmy <em>computer vision</em>. Próbowaliśmy całych sił, lecz nie udało nam się ukończyć tego zadania.</p>
+<p><img
+    src="/img/rustikon-2026/stanowiska.jpg"
+    alt="Zdjęcie strefy stoisk sponsorskich i partnerskich"
+    loading="lazy"
+/></p>
+<h2 id="opinie-czlonkow-kola"><a class="header-anchor no-hover-padding" href="#opinie-czlonkow-kola" aria-label="Anchor link for: opinie-czlonkow-kola"><span class="link-icon" aria-hidden="true"></span></a>
+Opinie członków koła</h2>
+<p>Każdy z nas wrócił z nieco innymi wrażeniami. Oto jak Rustikon 2026 podsumowują nasi członkowie:</p>
+<h3 id="daniel-olczyk"><a class="header-anchor no-hover-padding" href="#daniel-olczyk" aria-label="Anchor link for: daniel-olczyk"><span class="link-icon" aria-hidden="true"></span></a>
+Daniel Olczyk</h3>
+<blockquote>
+<p>Tegoroczny Rustikon nie tylko mnie nie zawiódł, ale wręcz pozytywnie zaskoczył na tle poprzedniej edycji. Poziom prelekcji i kuluarowych jest zauważalny, a wszystko to przy zachowaniu świetnej atmosfery i wzorowej organizacji. Wysłuchałem wielu fascynujących wystąpień, jednak moim absolutnym faworytem był wykład Jona Gjengseta o mutexach. Sposób, w jaki jasno wytłumaczył alternatywy dla standardowych rozwiązań i poparł to twardymi danymi z benchmarków, był po prostu rewelacyjny. Jedyne, czego mi trochę brakowało to więcej czasu na networking w kuluarach, ponieważ natłok prelekcji i nowej wiedzy bywał momentami lekko przytłaczający. Niemniej, całe doświadczenie oceniam bardzo pozytywnie i już nie mogę się doczekać kolejnej edycji!</p>
+</blockquote>
+<h3 id="borys-piwonski"><a class="header-anchor no-hover-padding" href="#borys-piwonski" aria-label="Anchor link for: borys-piwonski"><span class="link-icon" aria-hidden="true"></span></a>
+Borys Piwoński</h3>
+<blockquote>
+<p>Z perspektywy osoby, która wciąż uczy się Rusta, konferencja była świetnym i bardzo dobrze zorganizowanym doświadczeniem. Najbardziej zapadła mi w pamięć prelekcja o <code>left_right</code> - kapitalnie, w głęboko techniczny sposób wyjaśniono tam różnice względem standardowych Mutexów czy RwLocków w wielowątkowości. Na ogromny plus zasługuje też strefa stoisk (świetny mini hackathon i nagrody!) oraz różnorodność tematów prelekcji. Jedyny mały zgrzyt to niekonsekwentne pilnowanie czasu, przez co niektórzy prelegenci musieli dosłownie 'speedrunować' swoje prezentacje, a szkoda, bo tematy były tego warte.</p>
+</blockquote>
+<h3 id="zuzanna-koscielniak"><a class="header-anchor no-hover-padding" href="#zuzanna-koscielniak" aria-label="Anchor link for: zuzanna-koscielniak"><span class="link-icon" aria-hidden="true"></span></a>
+Zuzanna Kościelniak</h3>
+<blockquote>
+<p>Największe wrażenie zrobiła na mnie prelekcja o mutexach, rwlockach i wzorcu <code>left_right</code> - mocno skłoniła mnie do refleksji nad tym, jak podobne problemy rozwiązuje się w innych językach. Bardzo zaciekawił mnie też temat kontrolerów Kubernetesa w Ruście oraz ogólna różnorodność zastosowań tego języka. Ogromny plus za strefę stoisk: mini hackathon, grę w stylu koła fortuny (wielka satysfakcja ze zdobycia kraba!) oraz muzyczną przeróbkę We Will Rock You, której z chęcią słuchałabym na Spotify. Trochę brakowało mi tylko dłuższych przerw między wykładami przy krótszym attention span taki natłok wiedzy bywał lekkim overkillem. Niemniej, całe doświadczenie oceniam bardzo pozytywnie i wracam z ogromną motywacją do dalszej nauki.</p>
+</blockquote>
+<h3 id="lukasz-wiszniewski"><a class="header-anchor no-hover-padding" href="#lukasz-wiszniewski" aria-label="Anchor link for: lukasz-wiszniewski"><span class="link-icon" aria-hidden="true"></span></a>
+Łukasz Wiszniewski</h3>
+<blockquote>
+<p>Uważam Rustikon 2026 za bardzo udane wydarzenie. Świetni prelegenci i doskonała okazja do networkingu z ekspertami z branży. Dla mnie absolutnym hitem była prelekcja Mateusza Lenarta 'Getting hired in Rust: Recruiter's perspective'. Zobaczyłem, jak trudnym wyzwaniem jest rekrutacja w tym ekosystemie z punktu widzenia rekrutera, który musi weryfikować bardzo 'kreatywne' CV. W zabawny, choć nieco gorzki sposób przedstawił on realia rynku w 2026 roku, gdzie każdy deklaruje w papierach 'doświadczenie z Rustem', ale niekoniecznie potrafi wyjaśnić, czym w ogóle jest borrow checker.</p>
+</blockquote>
+<h2 id="podsumowanie"><a class="header-anchor no-hover-padding" href="#podsumowanie" aria-label="Anchor link for: podsumowanie"><span class="link-icon" aria-hidden="true"></span></a>
+Podsumowanie</h2>
+<p>Druga edycja Rustikonu utwierdziła nas w przekonaniu, że społeczność Rusta w Polsce rozwija się w niesamowitym tempie. Były to dwa dni pełne świetnych technicznych prelekcji, inspirujących rozmów w kuluarach i dzielenia się pasją z innymi inżynierami. Wyjechaliśmy z nową wiedzą i jeszcze większą motywacją do działania.
+Dziękujemy organizatorom, prelegentom, sponsorom i wszystkim uczestnikom za stworzenie tak wyjątkowego wydarzenia.</p>
+<p>Do zobaczenia za rok na kolejnej edycji!</p>
+
+        </section>
+
+        
+        
+        
+
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+        
+
+    </article>
+</main>
+
+    <div id="button-container">
+        
+        
+            <div id="toc-floating-container">
+                <input type="checkbox" id="toc-toggle" class="toggle"/>
+                <label for="toc-toggle" class="overlay"></label>
+                <label for="toc-toggle" id="toc-button" class="button" title="Przełącz spis treść">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M414.82-193.094q-18.044 0-30.497-12.32-12.453-12.319-12.453-30.036t12.453-30.086q12.453-12.37 30.497-12.37h392.767q17.237 0 29.927 12.487 12.69 12.486 12.69 30.203 0 17.716-12.69 29.919t-29.927 12.203H414.82Zm0-244.833q-18.044 0-30.497-12.487Q371.87-462.9 371.87-480.45t12.453-29.92q12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.511 12.69 12.512 12.69 29.845 0 17.716-12.69 30.086-12.69 12.37-29.927 12.37H414.82Zm0-245.167q-18.044 0-30.497-12.32t-12.453-30.037q0-17.716 12.453-30.086 12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.486 12.69 12.487 12.69 30.203 0 17.717-12.69 29.92-12.69 12.203-29.927 12.203H414.82ZM189.379-156.681q-32.652 0-55.878-22.829t-23.226-55.731q0-32.549 23.15-55.647 23.151-23.097 55.95-23.097 32.799 0 55.313 23.484 22.515 23.484 22.515 56.246 0 32.212-22.861 54.893-22.861 22.681-54.963 22.681Zm0-245.167q-32.652 0-55.878-23.134-23.226-23.135-23.226-55.623 0-32.487 23.467-55.517t56.12-23.03q32.102 0 54.721 23.288 22.62 23.288 22.62 55.775 0 32.488-22.861 55.364-22.861 22.877-54.963 22.877Zm-.82-244.833q-32.224 0-55.254-23.288-23.03-23.289-23.03-55.623 0-32.333 23.271-55.364 23.272-23.03 55.495-23.03 32.224 0 55.193 23.288 22.969 23.289 22.969 55.622 0 32.334-23.21 55.364-23.21 23.031-55.434 23.031Z"/></svg>
+                </label>
+                <div class="toc-content">
+                    
+
+<div class="toc-container">
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#nasza-reprezentacja">Nasza reprezentacja</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#pierwszy-dzien-konferencji">Pierwszy dzień konferencji</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#drugi-dzien-konferencji">Drugi dzień konferencji</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#stanowiska-sponsorskie-partnerskie">Stanowiska sponsorskie&#x2F;partnerskie</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#opinie-czlonkow-kola">Opinie członków koła</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#daniel-olczyk">Daniel Olczyk</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#borys-piwonski">Borys Piwoński</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#zuzanna-koscielniak">Zuzanna Kościelniak</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#lukasz-wiszniewski">Łukasz Wiszniewski</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2026/#podsumowanie">Podsumowanie</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+            </div>
+        
+
+        
+        
+
+        
+        <a href="#" id="top-button" class="no-hover-padding" title="Przejdź na początek strony">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"/></svg>
+        </a>
+    </div>
+
+
+<link rel="stylesheet" href="https://rust-lab-pjatk.github.io/katex.min.css">
+    <script defer src="https://rust-lab-pjatk.github.io/js/katex.min.js"></script><script defer src="https://rust-lab-pjatk.github.io/js/mermaid.min.js"></script><span id="copy-success" class="hidden">
+        Skopiowano!
+    </span>
+    <span id="copy-init" class="hidden">
+        Skopiuj kod do schowka
+    </span>
+    <script defer src="https://rust-lab-pjatk.github.io/js/copyCodeToClipboard.min.js"></script>
+
+
+    </div>
+    <footer>
+    <section>
+        <nav class="socials nav-navs"><ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="mailto:rustlab@pjwstk.edu.pl">
+                                    <img loading="lazy" alt="email" title="email" src="https://rust-lab-pjatk.github.io/social_icons/email.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://github.com/Rust-Lab-PJATK">
+                                    <img loading="lazy" alt="github" title="github" src="https://rust-lab-pjatk.github.io/social_icons/github.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.linkedin.com/company/rust-lab-pjatk">
+                                    <img loading="lazy" alt="linkedin" title="linkedin" src="https://rust-lab-pjatk.github.io/social_icons/linkedin.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.instagram.com/rustlabpjatk">
+                                    <img loading="lazy" alt="instagram" title="instagram" src="https://rust-lab-pjatk.github.io/social_icons/instagram.svg">
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            
+        </nav>
+
+        
+        <nav class="nav-navs">
+        </nav>
+
+        <div class="credits">
+            <small>
+                
+    
+    
+    
+    
+        
+    
+        
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    <p><p>© 2026 Rust Lab PJATK • Materiały na tej stronie są udostępniane na licencji <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p>
+</p>
+
+                
+                Strona oparta na oprogramowaniu
+                <a rel=""  href="https://www.getzola.org">Zola</a>
+                i
+                <a rel=""  href="https://github.com/welpo/tabi">tabi</a>
+
+                </small>
+        </div>
+    </section>
+
+    </footer>
+
+</body>
+
+</html>

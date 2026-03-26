@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pl" >
+
+<head>
+    <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy"
+content="default-src 'self';font-src &#x27;self&#x27; data: 'self';img-src &#x27;self&#x27; https:&#x2F;&#x2F;* data:;media-src &#x27;self&#x27;;style-src &#x27;self&#x27; 'unsafe-inline';frame-src player.vimeo.com https:&#x2F;&#x2F;www.youtube-nocookie.com;connect-src 'self';script-src 'self' 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https://rust-lab-pjatk.github.io">
+
+    
+    <title>Rust Lab PJATK • Rustikon 2025</title>
+
+    
+    
+    
+        <link rel=icon href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="central" text-anchor="middle" font-size="88">🦀</text></svg>'>
+    
+
+    
+    
+
+    
+    
+    
+        
+            <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/custom_subset.css?h=0b9535a28bc3d5bf2321">
+        
+    
+
+    
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/main.css?h=5761abda13287149cf75" />
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/skins/pjatk.css?h=14166792eb0b5e4e3507" />
+
+    <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#e30613" />
+        <meta name="description" content="Relacja z naszego udziału w pierwszej w Polsce konferencji poświęconej językowi Rust." />
+        <meta property="og:description" content="Relacja z naszego udziału w pierwszej w Polsce konferencji poświęconej językowi Rust." />
+
+    
+
+    <meta property="og:title" content="Rustikon 2025" />
+    <meta property="og:type" content="article" />
+
+    
+<meta property="og:locale" content="pl_PL" />
+
+    <meta property="og:url" content="https:&#x2F;&#x2F;rust-lab-pjatk.github.io&#x2F;blog&#x2F;rustikon-2025&#x2F;" /><meta property="og:site_name" content="Rust Lab PJATK">
+        <noscript><link rel="stylesheet" href="https://rust-lab-pjatk.github.io/no_js.css"/></noscript>
+        <script type="text/javascript" src="https://rust-lab-pjatk.github.io/js/initializeTheme.min.js"></script>
+        <script defer src="https://rust-lab-pjatk.github.io/js/themeSwitcher.min.js"></script></head>
+
+
+<body>
+    <header>
+    <nav class="navbar">
+        <div class="nav-title">
+            <a class="home-title" href="https://rust-lab-pjatk.github.io">Rust Lab PJATK</a>
+        </div>
+            <div class="nav-navs">
+                <ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/blog/">Blog
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/tags/">Tagi
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/archiwum/">Archiwum
+                                </a>
+                            </li>
+                        <li class="menu-icons-container">
+                        <ul class="menu-icons-group">
+                            
+
+                            
+                            
+
+                            <li class="theme-switcher-wrapper js"><div
+        title="Przełącz ciemny&#x2F;jasny motyw"
+        class="theme-switcher"
+        tabindex="0"
+        role="button"
+        aria-label="Przełącz ciemny motyw"
+        aria-pressed="false">
+    </div><div
+        title="Przywróć domyślny motyw"
+        class="theme-resetter arrow"
+        tabindex="0"
+        role="button"
+        aria-hidden="true"
+        aria-label="Przywróć domyślny motyw">
+    </div>
+
+</li>
+</ul>
+                    </li>
+                </ul>
+            </div>
+        
+    </nav>
+</header>
+
+    <div class="content">
+
+        
+        
+
+
+
+
+<main>
+    <article>
+        <h1 class="article-title">
+            Rustikon 2025
+        </h1>
+
+        <ul class="meta"><li>Autorzy: Maciej Pędzich</li>
+                <li><span class='separator' aria-hidden='true'>•</span>2 kwi 2025</li><li title="Słowa: 765"><span class='separator' aria-hidden='true'>•</span>Czas czytania (w minutach): 4</li><li class="tag"><span class='separator' aria-hidden='true'>•</span>Tagi:&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/relacja/">relacja</a>,&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/rustikon/">rustikon</a>,&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/konferencja/">konferencja</a></li>
+        </ul>
+            
+
+<div class="toc-container">
+    
+        <h3>Spis treści</h3>
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#nasza-reprezentacja">Nasza reprezentacja</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#kolo-fortuny-i-dziergany-ferris">Koło fortuny i dziergany Ferris</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#ulubione-prelekcje">Ulubione prelekcje</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#daniel-olczyk">Daniel Olczyk</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#lukasz-wiszniewski">Łukasz Wiszniewski</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#lukasz-ciwoniuk">Łukasz Ciwoniuk</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#przemyslaw-oneksiak">Przemysław Oneksiak</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#maciej-pedzich">Maciej Pędzich</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#podsumowanie">Podsumowanie</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+        
+
+        <section class="body"><h2 id="nasza-reprezentacja"><a class="header-anchor no-hover-padding" href="#nasza-reprezentacja" aria-label="Anchor link for: nasza-reprezentacja"><span class="link-icon" aria-hidden="true"></span></a>
+Nasza reprezentacja</h2>
+<p>26 marca 2025 roku w <a href="https://polin.pl/pl/centrum-konferencyjne">Centrum Konferencyjnym POLIN w Warszawie</a> odbyła się pierwsza w Polsce międzynarodowa konferencja dla programistów języka Rust - <a href="https://www.rustikon.dev">Rustikon</a>. Jako koło naukowe skupione wokół tego języka (i to z uczelni z miasta-gospodarza) wręcz nie wypadałoby nie wziąć udziału w tym wydarzeniu.</p>
+<p><img src="/img/rustikon-2025/grupowe.jpg" alt="Uśmiechnięci reprezentanci koła Rust Lab stojący na schodach i trzymający etykiety z imionami" /></p>
+<p>W skład naszej reprezentacji (na zdjęciu powyżej) weszli:</p>
+<ul>
+<li><a href="https://www.linkedin.com/in/daniel-olczyk">Daniel Olczyk</a> - w przednim rzędzie z lewej</li>
+<li><a href="https://www.linkedin.com/in/%C5%82ukasz-wiszniewski-382a82295">Łukasz Wiszniewski</a> - w przednim rzędzie z prawej</li>
+<li><a href="https://www.linkedin.com/in/lukaszciwoniuk">Łukasz Ciwoniuk</a> - w tylnym rzędzie z lewej</li>
+<li><a href="https://www.linkedin.com/in/maciejpedzich">Maciej Pędzich</a> - w tylnym rzędzie w środku</li>
+<li><a href="https://www.linkedin.com/in/przemys%C5%82aw-oneksiak-002a2b23a">Przemysław Oneksiak</a> - w tylnym rzędzie z prawej</li>
+</ul>
+<h2 id="kolo-fortuny-i-dziergany-ferris"><a class="header-anchor no-hover-padding" href="#kolo-fortuny-i-dziergany-ferris" aria-label="Anchor link for: kolo-fortuny-i-dziergany-ferris"><span class="link-icon" aria-hidden="true"></span></a>
+Koło fortuny i dziergany Ferris</h2>
+<p>Ze stoisk sponsorskich najciekawsze było naszym zdaniem stoisko samego organizatora konferencji, <a href="https://softwaremill.com">firmy SoftwareMill</a>, która przygotowała koło fortuny z pytaniami dotyczącymi języka Rust i jego ekosystemu.</p>
+<p>Każda poprawna odpowiedź mogła zostać nagrodzona drobynm upominkiem, w tym dzierganą maskotką Ferrisa. Spodobała nam się ona do tego stopnia, że każdy z nas zgarnął po jednym takim krabie.</p>
+<p><img
+  src="/img/rustikon-2025/ferris.jpg"
+  alt="Dziergany Ferris siedzący na laptopie"
+  loading="lazy"  
+/></p>
+<h2 id="ulubione-prelekcje"><a class="header-anchor no-hover-padding" href="#ulubione-prelekcje" aria-label="Anchor link for: ulubione-prelekcje"><span class="link-icon" aria-hidden="true"></span></a>
+Ulubione prelekcje</h2>
+<p>Na konferencji można było wysłuchać łącznie 14 prelekcji poruszających różne aspekty tworzenia oprogramowania w języku Rust, od przeglądu i konfiguracji mniej lub bardziej znanych narzędzi deweloperskich, aż po tajniki oraz pułapki programowania asynchronicznego.</p>
+<p>Nasi członkowie wskazali prezentacje, które najbardziej zapadły im w pamięć i dlaczego.</p>
+<h3 id="daniel-olczyk"><a class="header-anchor no-hover-padding" href="#daniel-olczyk" aria-label="Anchor link for: daniel-olczyk"><span class="link-icon" aria-hidden="true"></span></a>
+Daniel Olczyk</h3>
+<blockquote>
+<p>Dla mnie to zdecydowanie drugi wykład, który się nazywał <em>Reasoning with Async Rust</em>. Dobra analogia do życia codziennego, jako przygotowania śniadania do poznania zaawansowanej asynchroniczności.</p>
+<p>Znajomość użycia <code>join!</code> czy <code>select!</code> pozwoli na rozwiązaniu wielu problemów z współbieżnością w zaawansowanych projektach, gdzie operacja kolejnością zadań może być kluczowa.</p>
+</blockquote>
+<p><img
+  src="/img/rustikon-2025/reasoning-with-async-rust.jpg"
+  alt="Slajd z prezentacji Reasoning with Async Rust przedstawiający przykład wykorzystania join i select."
+  loading="lazy"  
+/></p>
+<h3 id="lukasz-wiszniewski"><a class="header-anchor no-hover-padding" href="#lukasz-wiszniewski" aria-label="Anchor link for: lukasz-wiszniewski"><span class="link-icon" aria-hidden="true"></span></a>
+Łukasz Wiszniewski</h3>
+<blockquote>
+<p>Najbardziej podobała mi się ostatnia prelekcja, czyli <em>Strongly Typed Financial Software</em>. W ciekawy sposób przedstawiono dobre wykorzystanie bezpieczeństwa i szybkości Rusta (dwa najważniejsze aspekty w tej branży) oraz pokazanie, że nie trzeba polegać wyłącznie na Javie 😁.</p>
+</blockquote>
+<p><img
+  src="/img/rustikon-2025/stfs.jpg"
+  alt="Slajd z prezentacji Strongly Typed Financial Software z memem z Gusem Fringiem"
+  loading="lazy"
+/></p>
+<h3 id="lukasz-ciwoniuk"><a class="header-anchor no-hover-padding" href="#lukasz-ciwoniuk" aria-label="Anchor link for: lukasz-ciwoniuk"><span class="link-icon" aria-hidden="true"></span></a>
+Łukasz Ciwoniuk</h3>
+<blockquote>
+<p>Szczerze, najbardziej spodobała mi się prelekcja <em>Using CRDTs Beyond Text Editors</em>.</p>
+<p>Odkrycie, że istnieją niezawodne i powtarzalne sposoby rozwiązywania konfliktów spójności w replikowanych danych bez użycia timestampów czy pełnego logu zmian, otworzyło mi oczy na wiele nowych możliwości implementacji tego typu systemów.</p>
+<p>Podejście to wydaje mi się szczególnie przydatne nie tylko w ekstremalnych warunkach, jak w przypadku firmy Helsing, ale także w bardziej powszechnych scenariuszach wymagających wysokiej dostępności i odporności na błędy.</p>
+</blockquote>
+<p><img
+  src="/img/rustikon-2025/crdt-1.jpg"
+  alt="Slajd tytułowy prezentacji Using CRDTs Beyond Text Editors"
+  loading="lazy"
+/></p>
+<h3 id="przemyslaw-oneksiak"><a class="header-anchor no-hover-padding" href="#przemyslaw-oneksiak" aria-label="Anchor link for: przemyslaw-oneksiak"><span class="link-icon" aria-hidden="true"></span></a>
+Przemysław Oneksiak</h3>
+<blockquote>
+<p>Osobiście, również mi przypadła do gustu ta ostatnia prelekcja - <em>Strongly Typed Financial Software</em>. Niby sam temat dosyć prosty i znany z innych języków, ale bardzo fajnie i przejrzyście wyjaśniony z przykładami, gdzie pewne nawyki okazują się pomocne.</p>
+<p>Wymieniłbym jeszcze ten wykład o 12:25 - <em>Using CRDTs Beyond Text Editors</em>. Nie miałem pojęcia o istnieniu takiej struktury danych, także koncepcyjnie bardzo spoko było posłuchać, mimo że temat wydaje się całkiem trudny.</p>
+<p>Również na plus moim zdaniem że to jest całkiem nowe rozwiązanie. Z tego co sprawdziłem, to taka koncepcja istnieje od niedawna, bo od 2011 roku.</p>
+</blockquote>
+<p><img
+  src="/img/rustikon-2025/crdt-2.jpg"
+  alt="Slajd z prezentacji Using CRDTs Beyond Text Editors przedstawiający mechanizm automerge"
+  loading="lazy"
+/></p>
+<h3 id="maciej-pedzich"><a class="header-anchor no-hover-padding" href="#maciej-pedzich" aria-label="Anchor link for: maciej-pedzich"><span class="link-icon" aria-hidden="true"></span></a>
+Maciej Pędzich</h3>
+<blockquote>
+<p>Najbardziej zapadła mi w pamięć prezentacja <a href="https://www.linkedin.com/in/andre-bogus-8a6784172">Andre Bogusia</a> pt. <em>Improving Your Rust Life</em> z dwóch powodów. Po pierwsze, zaśpiewanie <em>hymnu</em> na cześć języka Rust w akompaniamencie ukulele stanowiło zabawne otwarcie konferencji.</p>
+<p>Po drugie, Andre omówił wiele mniej znanych opcji konfiguracyjnych narzędzia <code>cargo</code>, warte włączenia reguły lintera <code>clippy</code>, dobre praktyki pisania testów jednostkowych i migawkowych, a także wiele przydatnych wtyczek do <code>cargo</code> usprawniających proces tworzenia, testowania i kompilacji projektów.</p>
+<p>Znajomość tych zagadnień rzeczywiście potrafi ulepszyć nie tylko życie programisty języka Rust, ale też jakość jego kodu.</p>
+</blockquote>
+<p><img
+  src="/img/rustikon-2025/improving-your-rust-life.jpg"
+  alt="Slajd z prezentacji Improving Your Rust Life przedstawiający aliasy komend cargo"
+  loading="lazy"
+/></p>
+<h2 id="podsumowanie"><a class="header-anchor no-hover-padding" href="#podsumowanie" aria-label="Anchor link for: podsumowanie"><span class="link-icon" aria-hidden="true"></span></a>
+Podsumowanie</h2>
+<p>Tegoroczną edycję Rustikonu uważamy za udaną. Mamy nadzieję, że będzie nam dane uczestniczyć w tej konferencji ponownie w 2026. Kto wie, być może jeden z członków naszego koła zostanie w przyszłości prelegentem na tej konferencji?</p>
+<p>Do zobaczenia za rok!</p>
+
+        </section>
+
+        
+        
+        
+
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+        
+
+    </article>
+</main>
+
+    <div id="button-container">
+        
+        
+            <div id="toc-floating-container">
+                <input type="checkbox" id="toc-toggle" class="toggle"/>
+                <label for="toc-toggle" class="overlay"></label>
+                <label for="toc-toggle" id="toc-button" class="button" title="Przełącz spis treść">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M414.82-193.094q-18.044 0-30.497-12.32-12.453-12.319-12.453-30.036t12.453-30.086q12.453-12.37 30.497-12.37h392.767q17.237 0 29.927 12.487 12.69 12.486 12.69 30.203 0 17.716-12.69 29.919t-29.927 12.203H414.82Zm0-244.833q-18.044 0-30.497-12.487Q371.87-462.9 371.87-480.45t12.453-29.92q12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.511 12.69 12.512 12.69 29.845 0 17.716-12.69 30.086-12.69 12.37-29.927 12.37H414.82Zm0-245.167q-18.044 0-30.497-12.32t-12.453-30.037q0-17.716 12.453-30.086 12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.486 12.69 12.487 12.69 30.203 0 17.717-12.69 29.92-12.69 12.203-29.927 12.203H414.82ZM189.379-156.681q-32.652 0-55.878-22.829t-23.226-55.731q0-32.549 23.15-55.647 23.151-23.097 55.95-23.097 32.799 0 55.313 23.484 22.515 23.484 22.515 56.246 0 32.212-22.861 54.893-22.861 22.681-54.963 22.681Zm0-245.167q-32.652 0-55.878-23.134-23.226-23.135-23.226-55.623 0-32.487 23.467-55.517t56.12-23.03q32.102 0 54.721 23.288 22.62 23.288 22.62 55.775 0 32.488-22.861 55.364-22.861 22.877-54.963 22.877Zm-.82-244.833q-32.224 0-55.254-23.288-23.03-23.289-23.03-55.623 0-32.333 23.271-55.364 23.272-23.03 55.495-23.03 32.224 0 55.193 23.288 22.969 23.289 22.969 55.622 0 32.334-23.21 55.364-23.21 23.031-55.434 23.031Z"/></svg>
+                </label>
+                <div class="toc-content">
+                    
+
+<div class="toc-container">
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#nasza-reprezentacja">Nasza reprezentacja</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#kolo-fortuny-i-dziergany-ferris">Koło fortuny i dziergany Ferris</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#ulubione-prelekcje">Ulubione prelekcje</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#daniel-olczyk">Daniel Olczyk</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#lukasz-wiszniewski">Łukasz Wiszniewski</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#lukasz-ciwoniuk">Łukasz Ciwoniuk</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#przemyslaw-oneksiak">Przemysław Oneksiak</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#maciej-pedzich">Maciej Pędzich</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/rustikon-2025/#podsumowanie">Podsumowanie</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+            </div>
+        
+
+        
+        
+
+        
+        <a href="#" id="top-button" class="no-hover-padding" title="Przejdź na początek strony">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"/></svg>
+        </a>
+    </div>
+
+
+<link rel="stylesheet" href="https://rust-lab-pjatk.github.io/katex.min.css">
+    <script defer src="https://rust-lab-pjatk.github.io/js/katex.min.js"></script><script defer src="https://rust-lab-pjatk.github.io/js/mermaid.min.js"></script><span id="copy-success" class="hidden">
+        Skopiowano!
+    </span>
+    <span id="copy-init" class="hidden">
+        Skopiuj kod do schowka
+    </span>
+    <script defer src="https://rust-lab-pjatk.github.io/js/copyCodeToClipboard.min.js"></script>
+
+
+    </div>
+    <footer>
+    <section>
+        <nav class="socials nav-navs"><ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="mailto:rustlab@pjwstk.edu.pl">
+                                    <img loading="lazy" alt="email" title="email" src="https://rust-lab-pjatk.github.io/social_icons/email.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://github.com/Rust-Lab-PJATK">
+                                    <img loading="lazy" alt="github" title="github" src="https://rust-lab-pjatk.github.io/social_icons/github.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.linkedin.com/company/rust-lab-pjatk">
+                                    <img loading="lazy" alt="linkedin" title="linkedin" src="https://rust-lab-pjatk.github.io/social_icons/linkedin.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.instagram.com/rustlabpjatk">
+                                    <img loading="lazy" alt="instagram" title="instagram" src="https://rust-lab-pjatk.github.io/social_icons/instagram.svg">
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            
+        </nav>
+
+        
+        <nav class="nav-navs">
+        </nav>
+
+        <div class="credits">
+            <small>
+                
+    
+    
+    
+    
+        
+    
+        
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    <p><p>© 2026 Rust Lab PJATK • Materiały na tej stronie są udostępniane na licencji <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p>
+</p>
+
+                
+                Strona oparta na oprogramowaniu
+                <a rel=""  href="https://www.getzola.org">Zola</a>
+                i
+                <a rel=""  href="https://github.com/welpo/tabi">tabi</a>
+
+                </small>
+        </div>
+    </section>
+
+    </footer>
+
+</body>
+
+</html>

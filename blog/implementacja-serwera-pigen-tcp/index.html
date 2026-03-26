@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pl" >
+
+<head>
+    <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy"
+content="default-src 'self';font-src &#x27;self&#x27; data: 'self';img-src &#x27;self&#x27; https:&#x2F;&#x2F;* data:;media-src &#x27;self&#x27;;style-src &#x27;self&#x27; 'unsafe-inline';frame-src player.vimeo.com https:&#x2F;&#x2F;www.youtube-nocookie.com;connect-src 'self';script-src 'self' 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https://rust-lab-pjatk.github.io">
+
+    
+    <title>Rust Lab PJATK • Implementacja serwera usługi Pigen na bazie protokołu TCP</title>
+
+    
+    
+    
+        <link rel=icon href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="central" text-anchor="middle" font-size="88">🦀</text></svg>'>
+    
+
+    
+    
+
+    
+    
+    
+        
+            <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/custom_subset.css?h=0b9535a28bc3d5bf2321">
+        
+    
+
+    
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/main.css?h=5761abda13287149cf75" />
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/skins/pjatk.css?h=14166792eb0b5e4e3507" />
+
+    <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#e30613" />
+        <meta name="description" content="Dowiedz się jak napisać wielowątkowy serwer obliczający kolejne cyfry liczby pi, wykorzystując protokół TCP i biblioteki do obsługi puli wątków oraz dużych liczb całkowitych." />
+        <meta property="og:description" content="Dowiedz się jak napisać wielowątkowy serwer obliczający kolejne cyfry liczby pi, wykorzystując protokół TCP i biblioteki do obsługi puli wątków oraz dużych liczb całkowitych." />
+
+    
+
+    <meta property="og:title" content="Implementacja serwera usługi Pigen na bazie protokołu TCP" />
+    <meta property="og:type" content="article" />
+
+    
+<meta property="og:locale" content="pl_PL" />
+
+    <meta property="og:url" content="https:&#x2F;&#x2F;rust-lab-pjatk.github.io&#x2F;blog&#x2F;implementacja-serwera-pigen-tcp&#x2F;" /><meta property="og:site_name" content="Rust Lab PJATK">
+        <noscript><link rel="stylesheet" href="https://rust-lab-pjatk.github.io/no_js.css"/></noscript>
+        <script type="text/javascript" src="https://rust-lab-pjatk.github.io/js/initializeTheme.min.js"></script>
+        <script defer src="https://rust-lab-pjatk.github.io/js/themeSwitcher.min.js"></script></head>
+
+
+<body>
+    <header>
+    <nav class="navbar">
+        <div class="nav-title">
+            <a class="home-title" href="https://rust-lab-pjatk.github.io">Rust Lab PJATK</a>
+        </div>
+            <div class="nav-navs">
+                <ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/blog/">Blog
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/tags/">Tagi
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/archiwum/">Archiwum
+                                </a>
+                            </li>
+                        <li class="menu-icons-container">
+                        <ul class="menu-icons-group">
+                            
+
+                            
+                            
+
+                            <li class="theme-switcher-wrapper js"><div
+        title="Przełącz ciemny&#x2F;jasny motyw"
+        class="theme-switcher"
+        tabindex="0"
+        role="button"
+        aria-label="Przełącz ciemny motyw"
+        aria-pressed="false">
+    </div><div
+        title="Przywróć domyślny motyw"
+        class="theme-resetter arrow"
+        tabindex="0"
+        role="button"
+        aria-hidden="true"
+        aria-label="Przywróć domyślny motyw">
+    </div>
+
+</li>
+</ul>
+                    </li>
+                </ul>
+            </div>
+        
+    </nav>
+</header>
+
+    <div class="content">
+
+        
+        
+
+
+
+
+<main>
+    <article>
+        <h1 class="article-title">
+            Implementacja serwera usługi Pigen na bazie protokołu TCP
+        </h1>
+
+        <ul class="meta"><li>Autorzy: Maciej Pędzich</li>
+                <li><span class='separator' aria-hidden='true'>•</span>15 mar 2025</li><li title="Słowa: 1940"><span class='separator' aria-hidden='true'>•</span>Czas czytania (w minutach): 10</li><li class="tag"><span class='separator' aria-hidden='true'>•</span>Tagi:&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/miniprojekt/">miniprojekt</a>,&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/sieci/">sieci</a></li>
+        </ul>
+            
+
+<div class="toc-container">
+    
+        <h3>Spis treści</h3>
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#specyfikacja-protokolu-i-moje-zmiany">Specyfikacja protokołu i moje zmiany</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#algorytm-na-obliczanie-kolejnych-cyfr-liczby-pi">Algorytm na obliczanie kolejnych cyfr liczby pi</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#zewnetrzne-biblioteki">Zewnętrzne biblioteki</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#threadpool-mechanizm-puli-watkow">threadpool - mechanizm puli wątków</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#rug-duze-liczby-calkowite">rug - duże liczby całkowite</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#analiza-kodu">Analiza kodu</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#inicjalizacja-serwera-i-puli-watkow">Inicjalizacja serwera i puli wątków</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#nasluchiwanie-polaczen-i-uruchamianie-kolejkowanie-watkow">Nasłuchiwanie połączeń i uruchamianie&#x2F;kolejkowanie wątków</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#implementacja-algorytmu-na-obliczanie-kolejnych-cyfr-pi">Implementacja algorytmu na obliczanie kolejnych cyfr pi</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#podsumowanie">Podsumowanie</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+        
+
+        <section class="body"><p>Witaj, świecie!</p>
+<p>Z okazji niedawno minionego <a href="https://www.piday.org">dnia liczby pi</a>, chciałbym przedstawić mój projekt serwera (nieco zmodyfikowanej) usługi Pigen opisanej w <a href="https://datatracker.ietf.org/doc/html/rfc3091">dokumencie IETF RFC 3091</a> oraz wyjaśnić stojący za nim algorytm do obliczania kolejnych cyfr tej liczby.</p>
+<p><a href="https://github.com/Rust-Lab-PJATK/pigen-tcp">Kod źródłowy znajdziesz tutaj</a>.</p>
+<h2 id="specyfikacja-protokolu-i-moje-zmiany"><a class="header-anchor no-hover-padding" href="#specyfikacja-protokolu-i-moje-zmiany" aria-label="Anchor link for: specyfikacja-protokolu-i-moje-zmiany"><span class="link-icon" aria-hidden="true"></span></a>
+Specyfikacja protokołu i moje zmiany</h2>
+<p>Specyfikacja Pigen w oparciu o protokół transportowy TCP ma bardzo proste wymagania:</p>
+<ol>
+<li>Serwer nasłuchuje na porcie numer 314159.</li>
+<li>Po nawiązaniu połączenia z klientem, serwer wysyła strumieniowo kolejne cyfry liczby π w systemie dziesiętnym i kodowaniu ASCII, począwszy od pierwszej cyfry po przecinku, aż do momentu rozłączenia się przez klienta.</li>
+</ol>
+<p>Wprowadziłem dwie drobne zmiany:</p>
+<ol>
+<li>Serwer nasłuchuje na porcie numer <strong>31415</strong>, ponieważ największy możliwy numer portu TCP wynosi 65535 (wybór portu 314159 był najpewniej niedopatrzeniem ze strony autora oryginalnego dokumentu).</li>
+<li>[...] serwer wysyła kolejne cyfry liczby π (w celu zmniejszenia obciążenia sieci) [...], począwszy od <strong>cyfry jedności</strong> [...], gdyż ułatwia to implementację oraz wytłumaczenie działania zastosowanego przeze mnie algorytmu.</li>
+</ol>
+<p>Specyfikacja nie narzuca konkretnej metody generowania cyfr. Choć mógłbym wykorzystać <a href="http://newton.ex.ac.uk/research/qsystems/collabs/pi/pi6.txt">plik z milionem cyfr</a> i wysyłać jego zawartość, takie rozwiązanie byłoby zbyt proste i mało interesujące. Co więcej, nie spełnia ono potrzeb klientów żądnych miliona jeden, miliona dwóch, czy miliona trzech pierwszych cyfr (o milionie czterech nie wspominając).</p>
+<h2 id="algorytm-na-obliczanie-kolejnych-cyfr-liczby-pi"><a class="header-anchor no-hover-padding" href="#algorytm-na-obliczanie-kolejnych-cyfr-liczby-pi" aria-label="Anchor link for: algorytm-na-obliczanie-kolejnych-cyfr-liczby-pi"><span class="link-icon" aria-hidden="true"></span></a>
+Algorytm na obliczanie kolejnych cyfr liczby pi</h2>
+<p>Zdecydowanie ciekawsze i bardziej elastyczne podejście stanowi zaprogramowanie algorytmu, który potrafi obliczyć π z dowolnie dużą precyzją, gdzie jedynymi ograniczeniami są dostępna moc obliczeniowa i pamięć.</p>
+<p>Z pomocą przychodzi wzór podany po raz pierwszy w XVII wieku przez <a href="https://en.wikipedia.org/wiki/William_Brouncker,_2nd_Viscount_Brouncker">Williama Brouncker'a</a>, który przedstawia ćwierć π jako <a href="https://pl.wikipedia.org/wiki/U%C5%82amek_%C5%82a%C5%84cuchowy">ułamek łańcuchowy</a>:</p>
+<p>$$\dfrac \pi 4 = \dfrac 1 {1 + \cfrac {1^2} {2 + \cfrac {3^2} {2 + \cfrac {5^2} {2 + \cfrac {7^2} {2 + \cdots } } } } }$$</p>
+<p>Jak zauważył L. J. Lange w <a href="https://www.jstor.org/stable/2589152">artykule <em>An Elegant Continued Fraction for π</em></a>, przy <a href="https://proofwiki.org/wiki/Brouncker%27s_Formula">dowodzeniu prawdziwości powyższego wzoru</a> można wykorzystać alternatywną formę ułamka łańcuchowego dla głównej krzywej rozgałęzienia funkcji $\arctan(z)$ w płaszczyźnie liczb zespolonych, gdzie $z$ nie znajduje się na osi urojonej ani od $-i$ poniżej, ani od $i$ wzwyż:</p>
+<p>$$\arctan(z) = \frac {z} {1+{\cfrac {(1z)^{2} } {3+{\cfrac {(2z)^{2} } { 5+{\cfrac {(3z)^{2} } {7+{\cfrac {(4z)^{2} } {9+\cdots } } } } } } } } }$$</p>
+<p>Podstawiając 1 za $z$ oraz mnożąc obie strony równości razy 4, otrzymamy:</p>
+<p>$$\pi = \frac {4} {1+{\cfrac {1^2} {3+{\cfrac {2^2} { 5+{\cfrac {3^2} {7+{\cfrac {4^2} {9+\cdots } } } } } } } } }$$</p>
+<p>W tej formie, każdy kolejny zagnieżdżony ułamek wynosi $\frac { k^2 } { 2k + 1 + \cdots } $ dla $k \in \natnums$, gdzie $\cdots$ oznacza sumę pozostałych ułamków tej postaci od $k + 1$ do $\infty$.</p>
+<p>Tym sposobem dochodzimy wreszcie do algorytmu opracowanego przez autorów <a href="https://homepages.cwi.nl/~steven/abc/programmers/handbook.html">podręcznika języka programowania ABC</a> (rozdział <em>Examples of ABC</em>, podrozdział <em>Numbers</em>), który polega na obliczaniu dwóch kolejnych przybliżeń, począwszy od $\frac 4 1$ oraz $\frac 4 {1 + \frac 1 3 }$ (czyli $\frac {12} 4$) i sprawdzeniu równości ich kolejnych cyfr w rozwinięciu dziesiętnym.</p>
+<p>Jeśli na danej pozycji znajduje się ta sama cyfra, wysyłamy ją do klienta i sprawdzamy równość cyfr na kolejnej pozycji. W przeciwnym razie, obliczamy kolejny ułamek w łańcuchu (w tej iteracji $\frac 4 {1 + \frac 1 { 3 + \frac 4 5 } }$), po czym wykonujemy sprawdzenie zgodności wiodących cyfr z $\frac 4 {1 + \frac 1 3 }$, dążąc tym samym do coraz większej dokładności z każdym następnym $k$.</p>
+<h2 id="zewnetrzne-biblioteki"><a class="header-anchor no-hover-padding" href="#zewnetrzne-biblioteki" aria-label="Anchor link for: zewnetrzne-biblioteki"><span class="link-icon" aria-hidden="true"></span></a>
+Zewnętrzne biblioteki</h2>
+<p>Zanim przejdziemy do <em>części praktycznej</em> tego artykułu, musimy jeszcze poruszyć dwie kwestie związane z projektem serwera Pigen.</p>
+<h3 id="threadpool-mechanizm-puli-watkow"><a class="header-anchor no-hover-padding" href="#threadpool-mechanizm-puli-watkow" aria-label="Anchor link for: threadpool-mechanizm-puli-watkow"><span class="link-icon" aria-hidden="true"></span></a>
+<code>threadpool</code> - mechanizm puli wątków</h3>
+<p>Pierwszą z nich jest obsługa wielu klientów jednocześnie. Ponieważ mamy do czynienia z usługą, która kładzie większy nacisk na moc obliczeniową serwera niż przepustowość sieci, zdecydowałem się na wykorzystanie tradycyjnych wątków systemowych zamiast modelu <code>async/await</code>.</p>
+<p>Oczywiście, tworzenie nowego wątku za każdym razem gdy zostanie nawiązane połączenie to prosty przepis na nieszczęście. Wystarczy, że ktoś uruchomi skrypt, który w nieskończonej pętli będzie otwierał nowe połączenia, żeby nie tylko nasz program, ale też całe urządzenie padło na kolana.</p>
+<p>Bardziej rozsądnym podejściem jest tworzenie ograniczonej liczby wątków do obsługi połączeń. W przypadku gdy zostanie ona osiągnięta, a nowy klient będzie chciał nawiązać z nami połączenie, wystarczy go poinformować o pełnym obciążeniu i zakolejkować jego żądanie. Kiedy inny klient się rozłączy, będziemy mogli wówczas obsłużyć klienta oczekującego w kolejce.</p>
+<p>Choć mógłbym się pokusić o napisanie <a href="https://buraksekili.github.io/articles/thread-pooling-rs">własnego mechanizmu puli wątków</a>, postanowiłem sięgnąć po <a href="https://crates.io/crates/threadpool">bibliotekę <code>threadpool</code></a>, by skupić się na wcześniej opisanym algorytmie. Skoro znów o nim mowa, czas przejść do drugiego problemu.</p>
+<h3 id="rug-duze-liczby-calkowite"><a class="header-anchor no-hover-padding" href="#rug-duze-liczby-calkowite" aria-label="Anchor link for: rug-duze-liczby-calkowite"><span class="link-icon" aria-hidden="true"></span></a>
+<code>rug</code> - duże liczby całkowite</h3>
+<p>Podstawowe typy liczb całkowitych w języku Rust mają pojemność ograniczoną do konkretnej liczby bajtów. Dla zdecydowanej większości programów dany zakres jest wystarczająco duży by przechowywać dane i wykonywać na nich obliczenia bez obaw o przekroczenie maksymalnej dopuszczalnej wartości.</p>
+<p>Niestety, nawet 64-bitowa liczba całkowita bez znaku (która potrafi zmieścić <a href="https://doc.rust-lang.org/std/primitive.u64.html#associatedconstant.MAX">ponad 18 trylionów</a>), okazuje się dla użytego przeze mnie algorytmu zbyt mała do obliczenia... dziesiątej cyfry po przecinku. Nic jednak dziwnego, gdyż ten algorytm został napisany z myślą o języku ABC, którego typ liczby całkowitej ma (teoretycznie) nieograniczoną pojemność.</p>
+<p>Mało tego, w niektórych językach <em>głównego nurtu</em> takich jak <a href="https://docs.python.org/3/library/stdtypes.html#numeric-types-int-float-complex">Python</a> czy <a href="https://ruby-doc.com/docs/ProgrammingRuby/html/tut_stdtypes.html">Ruby</a>, liczby całkowite również są (lub mogą być w razie potrzeby) przechowywane w formie potrafiącej pomieścić dowolnie dużą wartość. Z kolei w językach pokroju <a href="https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html">Javy</a> albo <a href="https://learn.microsoft.com/pl-pl/dotnet/api/system.numerics.biginteger?view=net-9.0">C#'a</a>, dostępny jest oddzielny typ do reprezentowania <em>nieskończenie wielkich</em> liczb całkowitych.</p>
+<p>O ile Rust nie posiada wbudowanego w język rozwiązania w stylu ostatnich dwóch ze wcześniej wspomnianych języków, tak na ratunek przychodzi społeczność z <a href="https://crates.io/crates/rug">biblioteką <code>rug</code></a>, która dostarcza wysokopoziomowy interfejs programistyczny dla <a href="https://gmplib.org">GNU Multiple Precision Arithmetic Library</a>.</p>
+<p>Skrzynka <code>rug</code> jest udostępniana na licencji <a href="https://www.gnu.org/licenses/lgpl-3.0.en.html">GNU <strong>Lesser</strong> General Public License v3</a>, co powinno ułatwić jej integrację z komercyjnymi projektami. Jeśli mimo to jej licencja nadal jest nieodpowiednia, polecam zapoznać się z zamiennikiem w postaci <a href="https://lib.rs/crates/num-bigint">biblioteki <code>num-bigint</code></a>.</p>
+<h2 id="analiza-kodu"><a class="header-anchor no-hover-padding" href="#analiza-kodu" aria-label="Anchor link for: analiza-kodu"><span class="link-icon" aria-hidden="true"></span></a>
+Analiza kodu</h2>
+<p>Po tym obszernym wstępie możemy w końcu przejść do analizy kodu serwera.</p>
+<h3 id="inicjalizacja-serwera-i-puli-watkow"><a class="header-anchor no-hover-padding" href="#inicjalizacja-serwera-i-puli-watkow" aria-label="Anchor link for: inicjalizacja-serwera-i-puli-watkow"><span class="link-icon" aria-hidden="true"></span></a>
+Inicjalizacja serwera i puli wątków</h3>
+<p>Zacznijmy od zaimportowania potrzebnych nam cech/interfejsów i struktur oraz utworzenia ich instancji:</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">rug<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>Assign<span class="z-punctuation z-separator z-rust">,</span> Integer</span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">std<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">error<span class="z-punctuation z-accessor z-rust">::</span></span>Error<span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">std<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">io<span class="z-punctuation z-accessor z-rust">::</span></span>Write<span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">std<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">net<span class="z-punctuation z-accessor z-rust">::</span></span>TcpListener<span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">threadpool<span class="z-punctuation z-accessor z-rust">::</span></span>ThreadPool<span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Result</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-punctuation z-section z-group z-end z-rust">)</span>, <span class="z-meta z-generic z-rust"><span class="z-support z-type z-rust">Box</span><span class="z-punctuation z-definition z-generic z-begin z-rust">&lt;</span>dyn Error<span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span><span class="z-punctuation z-definition z-generic z-end z-rust">&gt;</span></span></span> </span><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> pool <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">ThreadPool<span class="z-punctuation z-accessor z-rust">::</span></span>new<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-numeric z-integer z-decimal z-rust">5</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> listener <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">TcpListener<span class="z-punctuation z-accessor z-rust">::</span></span>bind<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>0.0.0.0:31415<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust">    <span class="z-support z-type z-rust">Ok</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span>
+</span></code></pre>
+<p>Wykorzystałem <a href="https://doc.rust-lang.org/rust-by-example/error/result.html#using-result-in-main">alternatywną sygnaturę funkcji <code>main</code></a>, aby móc posługiwać się <a href="https://doc.rust-lang.org/rust-by-example/std/result/question_mark.html">operatorem <code>?</code></a> do wyłuskiwania pomyślnych wyników zamiast potencjalnie panikujących wywołań <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap"><code>unwrap()</code></a>. W razie wystąpienia wyjątku, ten zostanie wyświetlony w postaci <a href="https://doc.rust-lang.org/std/fmt/trait.Debug.html"><code>Debug</code></a>, a proces zakończy się z kodem błędu. Natomiast podstawienie <a href="https://doc.rust-lang.org/std/boxed/index.html"><code>Box&lt;dyn Error&gt;</code></a> jako spodziewany typ błędu umożliwia zwracanie obiektu dowolnego typu, pod warunkiem że implementuje <a href="https://doc.rust-lang.org/std/error/trait.Error.html">cechę <code>Error</code></a>.</p>
+<p>Co do liczby wątków w puli, 5 nie jest w żaden sposób wiążącą czy najbardziej optymalną liczbą. Można dowolnie eksperymentować z jej zwiększaniem lub zmniejszaniem w zależności od wymaganej liczby klientów do równoległego obsługiwania oraz mocy obliczeniowej serwera.</p>
+<h3 id="nasluchiwanie-polaczen-i-uruchamianie-kolejkowanie-watkow"><a class="header-anchor no-hover-padding" href="#nasluchiwanie-polaczen-i-uruchamianie-kolejkowanie-watkow" aria-label="Anchor link for: nasluchiwanie-polaczen-i-uruchamianie-kolejkowanie-watkow"><span class="link-icon" aria-hidden="true"></span></a>
+Nasłuchiwanie połączeń i uruchamianie/kolejkowanie wątków</h3>
+<p>Mamy zadeklarowany nasłuchiwacz, więc pora na obsługę przychodzących połączeń. Jeśli dysponujemy wolnym wątkiem, możemy natychmiastowo rozpocząć generowanie cyfr π dla klienta. W przeciwnym razie musimy go poinformować, że serwer osiągnął limit obsługiwanych jednocześnie połączeń i zakolejkować żądanie.</p>
+<p>W tym celu należy dodać poniższy kawałek kodu między deklaracją zmiennej <code>listener</code>, a zwróceniem wartości <code>Ok(())</code>:</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-keyword z-control z-rust">for</span> <span class="z-storage z-modifier z-rust">mut</span> stream <span class="z-keyword z-operator z-rust">in</span> listener<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">incoming</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">flatten</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-keyword z-control z-rust">if</span> pool<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">active_count</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-keyword z-operator z-comparison z-rust">==</span> pool<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">max_count</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        stream<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">write_all</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-string z-quoted z-double z-rust"><span class="z-storage z-type z-string z-rust">b</span><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>Serwer jest zajęty! Proszę czekać...<span class="z-constant z-character z-escape z-rust">\n</span><span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-keyword z-operator z-rust">?</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    pool<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">execute</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-storage z-modifier z-rust">move</span> <span class="z-keyword z-operator z-logical z-rust">||</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-block z-rust">        <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> cdn.
+</span></span></span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-group z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></code></pre>
+<p><a href="https://doc.rust-lang.org/std/net/struct.TcpListener.html#method.incoming">Metoda <code>incoming()</code></a> zwraca iterator, który w nieskończonej pętli akceptuje przychodzące połączenia, a każdy element jest <a href="https://doc.rust-lang.org/std/io/type.Result.html">typu <code>io::Result</code></a>, którego pomyślnym wynikiem jest <a href="https://doc.rust-lang.org/std/net/struct.TcpStream.html">obiekt reprezentujący strumień TCP</a>. Z kolei <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten">metoda <code>flatten()</code></a> pozwala nam wyłuskać wspomniany strumień z elementów iteratora, które są pomyślnymi wynikami, a oprócz tego pominąć wszystkie wyniki wariantu porażki.</p>
+<p>Pomimo tego, że wykonujemy sprawdzenie równości obecnej liczby aktywnych wątków i ich maksymalnej dopuszczalnej liczby, zarówno uruchamianie jak i kolejkowanie wątków odbywa się poprzez wywołanie <a href="https://docs.rs/threadpool/1.8.1/threadpool/struct.ThreadPool.html#method.execute">metody <code>execute()</code> puli wątków</a>. Pula zadba o uruchomienie pierwszego w kolejce wątku kiedy inny wątek zakończy pracę.</p>
+<p>Ponieważ będziemy odwoływać się wewnątrz wątku do obiektu <code>stream</code>, należy pamiętać o umieszczeniu słowa kluczowego <code>move</code> przed definicją domknięcia. Istnieje bowiem szansa, że wątek <em>poboczny</em> będzie aktywny dłużej niż ten, który go uruchomił. Stąd też wymagane jest, by wszelkie dane używane w nowym wątku miały czas życia równy <code>'static</code>, czyli żeby były dostępne aż do końca działania wątku.</p>
+<p>Domyślnie <code>stream</code> zostałby jedynie pożyczony, a skoro nie mamy gwarancji, że jego czas życia będzie co najmniej równy czasowi trwania wątku, to przy próbie użycia <code>stream</code> w domknięciu bez <code>move</code> otrzymamy <a href="https://doc.rust-lang.org/error_codes/E0373.html">błąd kompilacji</a>. Zatem domknięcie musi przejąć <code>stream</code> na własność w celu spełnienia powyższego wymagania.</p>
+<h3 id="implementacja-algorytmu-na-obliczanie-kolejnych-cyfr-pi"><a class="header-anchor no-hover-padding" href="#implementacja-algorytmu-na-obliczanie-kolejnych-cyfr-pi" aria-label="Anchor link for: implementacja-algorytmu-na-obliczanie-kolejnych-cyfr-pi"><span class="link-icon" aria-hidden="true"></span></a>
+Implementacja algorytmu na obliczanie kolejnych cyfr pi</h3>
+<p>Czas na gwódź programu. Zaczynamy wewnątrz domknięcia od deklaracji zmiennych dla $k$ oraz dwóch kolejnych przybliżeń π:</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> k <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-numeric z-integer z-decimal z-rust">2</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> a <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-numeric z-integer z-decimal z-rust">4</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> b <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-numeric z-integer z-decimal z-rust">1</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> a1 <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-numeric z-integer z-decimal z-rust">12</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> b1 <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-numeric z-integer z-decimal z-rust">4</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></code></pre>
+<p>Zmienne <code>a</code> i <code>a1</code> oznaczają liczniki, zaś <code>b</code> i <code>b1</code> mianowniki odpowiednich przybliżeń. Następnie rozpoczynamy nieskończoną pętlę z etykietą <code>'pi</code>, na początku której obliczamy $k$-ty ułamek w serii i odpowiednio zwiększamy <code>a1</code> i <code>b1</code>, by uzyskać $k$-te przybliżenie π. Poprzednie wartości tych zmiennych przypisujemy do <code>a</code> i <code>b</code> oraz zwiększamy $k$ o 1.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-entity z-name z-label z-rust">&#39;pi</span><span class="z-punctuation z-separator z-rust">:</span> <span class="z-keyword z-control z-rust">loop</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> p <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>k <span class="z-keyword z-operator z-arithmetic z-rust">*</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>k</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> q <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-numeric z-integer z-decimal z-rust">2</span> <span class="z-keyword z-operator z-arithmetic z-rust">*</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>k</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-keyword z-operator z-arithmetic z-rust">+</span> <span class="z-constant z-numeric z-integer z-decimal z-rust">1</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> prev_a1 <span class="z-keyword z-operator z-assignment z-rust">=</span> a1<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">clone</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> prev_b1 <span class="z-keyword z-operator z-assignment z-rust">=</span> b1<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">clone</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    k <span class="z-keyword z-operator z-assignment z-rust">+=</span> <span class="z-constant z-numeric z-integer z-decimal z-rust">1</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    a1 <span class="z-keyword z-operator z-assignment z-rust">*=</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>q<span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    a1 <span class="z-keyword z-operator z-assignment z-rust">+=</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>p <span class="z-keyword z-operator z-arithmetic z-rust">*</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>a<span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    b1 <span class="z-keyword z-operator z-assignment z-rust">*=</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>q<span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    b1 <span class="z-keyword z-operator z-assignment z-rust">+=</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>p <span class="z-keyword z-operator z-arithmetic z-rust">*</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>b<span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    a <span class="z-keyword z-operator z-assignment z-rust">=</span> prev_a1<span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    b <span class="z-keyword z-operator z-assignment z-rust">=</span> prev_b1<span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></code></pre>
+<p>Warto zwrócić uwagę chociażby na formę deklaracji zmiennych <code>p</code> i <code>q</code> oraz na rozbicie poszczególnych operacji na <code>a1</code> i <code>b1</code> zamiast jednego większego wyrażenia lub operacji przypisania jak w oryginalnej implementacji algorytmu w języku ABC. Wynika to ze zwracania przez <code>rug</code> <a href="https://docs.rs/rug/1.27.0/rug/index.html#incomplete-computation-values"><em>niepełnego wyniku obliczeń</em></a> dla działań na dwóch obiektach <code>Integer</code> zamiast nowego obiektu tego samego typu.</p>
+<p>Takie zachowanie pozwala zmniejszyć liczbę kosztownych operacji alokacji pamięci wykonywanych przez te obiekty, chociażby poprzez przypisywanie tych wyników do istniejących obiektów z pomocą przeciążonych operatorów albo <a href="https://docs.rs/rug/1.27.0/rug/struct.Integer.html#impl-Assign-for-Integer">metody <code>assign()</code></a>. Jeśli jednak nie ma innego wyjścia niż utworzenie nowej liczby typu <code>Integer</code>, to możemy przekazać wynik do <code>Integer::from</code> tak samo jak robiliśmy to ze <em>zwykłymi</em> liczbami.</p>
+<p>Zostało nam już tylko wyciąganie i porównywanie kolejnych cyfr z rozwinięć dziesiętnych przybliżeń π Jesli cyfra na danej pozycji jest taka sama dla obu ułamków, możemy ją wysłać do klienta. W razie gdy jej przesłanie się nie powiedzie (najpewniej z powodu zerwania połączenia przez klienta), przerywamy pętlę <code>'pi</code> i tym samym kończymy wątek. Jeśli cyfry się różnią, to oznacza, że czas na obliczenie kolejnego przybliżenia π.</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> d <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>a <span class="z-keyword z-operator z-arithmetic z-rust">/</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>b</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> d1 <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">Integer<span class="z-punctuation z-accessor z-rust">::</span></span>from<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>a1 <span class="z-keyword z-operator z-arithmetic z-rust">/</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>b1</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-keyword z-control z-rust">while</span> d <span class="z-keyword z-operator z-comparison z-rust">==</span> d1 <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> ascii_d <span class="z-keyword z-operator z-assignment z-rust">=</span> d<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">to_string</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-keyword z-control z-rust">if</span> <span class="z-storage z-type z-rust">let</span> <span class="z-support z-type z-rust">Err</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>_e</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-keyword z-operator z-assignment z-rust">=</span> stream<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">write_all</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>ascii_d<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">as_ref</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">        <span class="z-keyword z-control z-rust">break</span> <span class="z-storage z-modifier z-lifetime z-rust">&#39;pi</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    a <span class="z-keyword z-operator z-assignment z-rust">%=</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>b<span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    a <span class="z-keyword z-operator z-assignment z-rust">*=</span> <span class="z-constant z-numeric z-integer z-decimal z-rust">10</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    a1 <span class="z-keyword z-operator z-assignment z-rust">%=</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>b1<span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    a1 <span class="z-keyword z-operator z-assignment z-rust">*=</span> <span class="z-constant z-numeric z-integer z-decimal z-rust">10</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    d<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">assign</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>a <span class="z-keyword z-operator z-arithmetic z-rust">/</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>b</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    d1<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">assign</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>a1 <span class="z-keyword z-operator z-arithmetic z-rust">/</span> <span class="z-keyword z-operator z-bitwise z-rust">&amp;</span>b1</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></code></pre>
+<p>Warto zauważyć, że nie musimy dokonywać konwersji łańcucha <code>ascii_d</code> na opakowywany przez niego wektor bajtów. Typ <code>String</code> implementuje <a href="https://doc.rust-lang.org/std/convert/trait.AsRef.html">cechę <code>AsRef</code></a> do pobierania referencji na wycinek bajtów (<code>&amp;[u8]</code>) zamiast <code>&amp;String</code>, kiedy <a href="https://doc.rust-lang.org/std/io/trait.Write.html#method.write_all">metoda <code>write_all()</code></a> wymaga dostarczenia danych do wysłania w formie <code>&amp;[u8]</code>.</p>
+<h2 id="podsumowanie"><a class="header-anchor no-hover-padding" href="#podsumowanie" aria-label="Anchor link for: podsumowanie"><span class="link-icon" aria-hidden="true"></span></a>
+Podsumowanie</h2>
+<p>Serwer jest gotowy! Teraz wystarczy go uruchomić i przetestować np. za pomocą klienta ogólnego użytku jak <a href="https://nmap.org/ncat"><code>ncat</code></a>:</p>
+<pre data-lang="bash" class="language-bash z-code"><code class="language-bash" data-lang="bash"><span class="z-source z-shell z-bash"><span class="z-meta z-function-call z-shell"><span class="z-variable z-function z-shell">ncat</span></span><span class="z-meta z-function-call z-arguments z-shell"><span class="z-variable z-parameter z-option z-shell"><span class="z-punctuation z-definition z-parameter z-shell"> --</span>recv-only</span> WSTAW_TU_IP_SERWERA 31415</span>
+</span></code></pre>
+<p>Oczywiście, temu projektowi daleko do miana rekordzisty prędkości, a samych sposobów na wyznaczanie kolejnych cyfr liczby π jest znacznie więcej. Moim celem było zaprezentowanie paru przydatnych bibliotek oraz wyjaśnienie całkiem prostego w implementacji aglorytmu, co mam nadzieję udało mi się osiągnąć.</p>
+<p>Zachęcam do poeksperymentowania z innymi algorytmami, rozbijaniem samych obliczeń na wiele wątków, czy napisania od podstaw serwera usługi Pigen w oparciu o <a href="https://datatracker.ietf.org/doc/html/rfc3091#autoid-3">protokół UDP</a>.</p>
+<p>Do zobaczenia w kolejnym artykule!</p>
+
+        </section>
+
+        
+        
+        
+
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+        
+
+    </article>
+</main>
+
+    <div id="button-container">
+        
+        
+            <div id="toc-floating-container">
+                <input type="checkbox" id="toc-toggle" class="toggle"/>
+                <label for="toc-toggle" class="overlay"></label>
+                <label for="toc-toggle" id="toc-button" class="button" title="Przełącz spis treść">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M414.82-193.094q-18.044 0-30.497-12.32-12.453-12.319-12.453-30.036t12.453-30.086q12.453-12.37 30.497-12.37h392.767q17.237 0 29.927 12.487 12.69 12.486 12.69 30.203 0 17.716-12.69 29.919t-29.927 12.203H414.82Zm0-244.833q-18.044 0-30.497-12.487Q371.87-462.9 371.87-480.45t12.453-29.92q12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.511 12.69 12.512 12.69 29.845 0 17.716-12.69 30.086-12.69 12.37-29.927 12.37H414.82Zm0-245.167q-18.044 0-30.497-12.32t-12.453-30.037q0-17.716 12.453-30.086 12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.486 12.69 12.487 12.69 30.203 0 17.717-12.69 29.92-12.69 12.203-29.927 12.203H414.82ZM189.379-156.681q-32.652 0-55.878-22.829t-23.226-55.731q0-32.549 23.15-55.647 23.151-23.097 55.95-23.097 32.799 0 55.313 23.484 22.515 23.484 22.515 56.246 0 32.212-22.861 54.893-22.861 22.681-54.963 22.681Zm0-245.167q-32.652 0-55.878-23.134-23.226-23.135-23.226-55.623 0-32.487 23.467-55.517t56.12-23.03q32.102 0 54.721 23.288 22.62 23.288 22.62 55.775 0 32.488-22.861 55.364-22.861 22.877-54.963 22.877Zm-.82-244.833q-32.224 0-55.254-23.288-23.03-23.289-23.03-55.623 0-32.333 23.271-55.364 23.272-23.03 55.495-23.03 32.224 0 55.193 23.288 22.969 23.289 22.969 55.622 0 32.334-23.21 55.364-23.21 23.031-55.434 23.031Z"/></svg>
+                </label>
+                <div class="toc-content">
+                    
+
+<div class="toc-container">
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#specyfikacja-protokolu-i-moje-zmiany">Specyfikacja protokołu i moje zmiany</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#algorytm-na-obliczanie-kolejnych-cyfr-liczby-pi">Algorytm na obliczanie kolejnych cyfr liczby pi</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#zewnetrzne-biblioteki">Zewnętrzne biblioteki</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#threadpool-mechanizm-puli-watkow">threadpool - mechanizm puli wątków</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#rug-duze-liczby-calkowite">rug - duże liczby całkowite</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#analiza-kodu">Analiza kodu</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#inicjalizacja-serwera-i-puli-watkow">Inicjalizacja serwera i puli wątków</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#nasluchiwanie-polaczen-i-uruchamianie-kolejkowanie-watkow">Nasłuchiwanie połączeń i uruchamianie&#x2F;kolejkowanie wątków</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#implementacja-algorytmu-na-obliczanie-kolejnych-cyfr-pi">Implementacja algorytmu na obliczanie kolejnych cyfr pi</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/implementacja-serwera-pigen-tcp/#podsumowanie">Podsumowanie</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+            </div>
+        
+
+        
+        
+
+        
+        <a href="#" id="top-button" class="no-hover-padding" title="Przejdź na początek strony">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"/></svg>
+        </a>
+    </div>
+
+
+<link rel="stylesheet" href="https://rust-lab-pjatk.github.io/katex.min.css">
+    <script defer src="https://rust-lab-pjatk.github.io/js/katex.min.js"></script><script defer src="https://rust-lab-pjatk.github.io/js/mermaid.min.js"></script><span id="copy-success" class="hidden">
+        Skopiowano!
+    </span>
+    <span id="copy-init" class="hidden">
+        Skopiuj kod do schowka
+    </span>
+    <script defer src="https://rust-lab-pjatk.github.io/js/copyCodeToClipboard.min.js"></script>
+
+
+    </div>
+    <footer>
+    <section>
+        <nav class="socials nav-navs"><ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="mailto:rustlab@pjwstk.edu.pl">
+                                    <img loading="lazy" alt="email" title="email" src="https://rust-lab-pjatk.github.io/social_icons/email.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://github.com/Rust-Lab-PJATK">
+                                    <img loading="lazy" alt="github" title="github" src="https://rust-lab-pjatk.github.io/social_icons/github.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.linkedin.com/company/rust-lab-pjatk">
+                                    <img loading="lazy" alt="linkedin" title="linkedin" src="https://rust-lab-pjatk.github.io/social_icons/linkedin.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.instagram.com/rustlabpjatk">
+                                    <img loading="lazy" alt="instagram" title="instagram" src="https://rust-lab-pjatk.github.io/social_icons/instagram.svg">
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            
+        </nav>
+
+        
+        <nav class="nav-navs">
+        </nav>
+
+        <div class="credits">
+            <small>
+                
+    
+    
+    
+    
+        
+    
+        
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    <p><p>© 2026 Rust Lab PJATK • Materiały na tej stronie są udostępniane na licencji <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p>
+</p>
+
+                
+                Strona oparta na oprogramowaniu
+                <a rel=""  href="https://www.getzola.org">Zola</a>
+                i
+                <a rel=""  href="https://github.com/welpo/tabi">tabi</a>
+
+                </small>
+        </div>
+    </section>
+
+    </footer>
+
+</body>
+
+</html>

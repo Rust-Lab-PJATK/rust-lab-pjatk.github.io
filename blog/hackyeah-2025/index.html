@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pl" >
+
+<head>
+    <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy"
+content="default-src 'self';font-src &#x27;self&#x27; data: 'self';img-src &#x27;self&#x27; https:&#x2F;&#x2F;* data:;media-src &#x27;self&#x27;;style-src &#x27;self&#x27; 'unsafe-inline';frame-src player.vimeo.com https:&#x2F;&#x2F;www.youtube-nocookie.com;connect-src 'self';script-src 'self' 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https://rust-lab-pjatk.github.io">
+
+    
+    <title>Rust Lab PJATK • HackYeah 2025</title>
+
+    
+    
+    
+        <link rel=icon href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="central" text-anchor="middle" font-size="88">🦀</text></svg>'>
+    
+
+    
+    
+
+    
+    
+    
+        
+            <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/custom_subset.css?h=0b9535a28bc3d5bf2321">
+        
+    
+
+    
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/main.css?h=5761abda13287149cf75" />
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/skins/pjatk.css?h=14166792eb0b5e4e3507" />
+
+    <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#e30613" />
+        <meta name="description" content="Największy hackathon w Europie naszymi oczami" />
+        <meta property="og:description" content="Największy hackathon w Europie naszymi oczami" />
+
+    
+
+    <meta property="og:title" content="HackYeah 2025" />
+    <meta property="og:type" content="article" />
+
+    
+<meta property="og:locale" content="pl_PL" />
+
+    <meta property="og:url" content="https:&#x2F;&#x2F;rust-lab-pjatk.github.io&#x2F;blog&#x2F;hackyeah-2025&#x2F;" /><meta property="og:site_name" content="Rust Lab PJATK">
+        <noscript><link rel="stylesheet" href="https://rust-lab-pjatk.github.io/no_js.css"/></noscript>
+        <script type="text/javascript" src="https://rust-lab-pjatk.github.io/js/initializeTheme.min.js"></script>
+        <script defer src="https://rust-lab-pjatk.github.io/js/themeSwitcher.min.js"></script></head>
+
+
+<body>
+    <header>
+    <nav class="navbar">
+        <div class="nav-title">
+            <a class="home-title" href="https://rust-lab-pjatk.github.io">Rust Lab PJATK</a>
+        </div>
+            <div class="nav-navs">
+                <ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/blog/">Blog
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/tags/">Tagi
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/archiwum/">Archiwum
+                                </a>
+                            </li>
+                        <li class="menu-icons-container">
+                        <ul class="menu-icons-group">
+                            
+
+                            
+                            
+
+                            <li class="theme-switcher-wrapper js"><div
+        title="Przełącz ciemny&#x2F;jasny motyw"
+        class="theme-switcher"
+        tabindex="0"
+        role="button"
+        aria-label="Przełącz ciemny motyw"
+        aria-pressed="false">
+    </div><div
+        title="Przywróć domyślny motyw"
+        class="theme-resetter arrow"
+        tabindex="0"
+        role="button"
+        aria-hidden="true"
+        aria-label="Przywróć domyślny motyw">
+    </div>
+
+</li>
+</ul>
+                    </li>
+                </ul>
+            </div>
+        
+    </nav>
+</header>
+
+    <div class="content">
+
+        
+        
+
+
+
+
+<main>
+    <article>
+        <h1 class="article-title">
+            HackYeah 2025
+        </h1>
+
+        <ul class="meta"><li>Autorzy: Daniel Olczyk</li>
+                <li><span class='separator' aria-hidden='true'>•</span>16 paź 2025</li><li title="Słowa: 1432"><span class='separator' aria-hidden='true'>•</span>Czas czytania (w minutach): 8</li><li class="tag"><span class='separator' aria-hidden='true'>•</span>Tagi:&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/relacja/">relacja</a>,&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/hackathon/">hackathon</a>,&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/hackyeah/">hackyeah</a></li>
+        </ul>
+            
+
+<div class="toc-container">
+    
+        <h3>Spis treści</h3>
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#poczatek-wydarzenia">Początek wydarzenia</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#formowanie-zespolu-i-start-pracy">Formowanie zespołu i start pracy</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#wybor-tematu-i-dalsze-prace">Wybór tematu i dalsze prace</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#druga-polowa-wyzwania">Druga połowa wyzwania</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#projekt-pulsetransit">Projekt „PulseTransit”</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#finalny-werdykt">Finalny werdykt</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#wrazenia-po-wydarzeniu">Wrażenia po wydarzeniu</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#norbert-olkowski">Norbert Olkowski</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#lukasz-wiszniewski">Łukasz Wiszniewski</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#daniel-olczyk">Daniel Olczyk</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#podsumowanie">Podsumowanie</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+        
+
+        <section class="body"><p>W pierwszy weekend października 03.10-04.10 w Krakowie odbył się największy hackathon w Europie <a href="https://hackyeah.pl/">HackYeah 2025</a>, który miał miejsce w <a href="https://www.tauronarenakrakow.pl/">TAURON Arenie</a>. Tysiące programistów, projektantów i pasjonatów technologii spotkało się w jednym miejscu, by w ciągu 24 godzin stworzyć rozwiązania na zadane tematy i zawalczyć o nagrody. Wraz z częścią naszego zespołu postanowiliśmy podjąć wyzwania stworzenia aplikacji na dany temat w 24 godziny. Udało nam się ją zbudować — a czy zdobyliśmy nagrodę? O tym za chwilę.</p>
+<p><img src="/img/hackyeah-2025/grupowe.jpg" alt="Nasza reprezentacja" title="Nadal uśmiechnięci po tak wymagającym hackathonie" /></p>
+<p>Z naszej reprezentacji koła naukowego wzięli udział (od lewej strony):</p>
+<ul>
+<li><a href="https://www.linkedin.com/in/norbert-olkowski/">Norbert Olkowski</a></li>
+<li><a href="https://www.linkedin.com/in/kawieki/">Łukasz Wiszniewski</a></li>
+<li><a href="https://www.linkedin.com/in/daniel-olczyk/">Daniel Olczyk</a></li>
+</ul>
+<h2 id="poczatek-wydarzenia"><a class="header-anchor no-hover-padding" href="#poczatek-wydarzenia" aria-label="Anchor link for: poczatek-wydarzenia"><span class="link-icon" aria-hidden="true"></span></a>
+Początek wydarzenia</h2>
+<p>Na start przeszliśmy się po stoiskach sponsorów, wśród których znaleźli się między innymi KNF, ZUS oraz Województwo Małopolskie. Każde z nich przyciągało uwagę nie tylko atrakcyjną oprawą wizualną, ale też ciekawymi zadaniami i gadżetami.</p>
+<p>Na przykład stoisko Heinekena oferowało skarpety i gumowe kaczuszki - <a href="https://pl.wikipedia.org/wiki/Metoda_gumowej_kaczuszki">nieodłączny symbol wśród programistów</a>. Z kolei na stanowisku AGH trzeba było rozwiązać losowe zadanie matematyczne - my wylosowaliśmy zadanie związane z <a href="https://pl.wikipedia.org/wiki/Entropia_(teoria_informacji)">entropią</a>, co okazało się przyjemnym intelektualnym rozruchem przed właściwym startem hackathonu.</p>
+<p>Spacer po stoiskach pozwolił nam złapać pierwsze wrażenia z wydarzenia oraz poczuć atmosferę współzawodnictwa, która towarzyszyła uczestnikom już od samego początku.</p>
+<h2 id="formowanie-zespolu-i-start-pracy"><a class="header-anchor no-hover-padding" href="#formowanie-zespolu-i-start-pracy" aria-label="Anchor link for: formowanie-zespolu-i-start-pracy"><span class="link-icon" aria-hidden="true"></span></a>
+Formowanie zespołu i start pracy</h2>
+<p>Przed oficjalnym rozpoczęciem hackathonu postanowiliśmy rozbudować nasz skład o osoby z uczelni Akademia Górniczo-Hutnicza im. Stanisława Staszica w Krakowie podczas team buildingu o 11:00, który odbywał się na wydarzeniu. Wspólna rozmowa szybko przerodziła się w konkretną współpracę, a nasz ostateczny zespół "Golphins" wyglądał następująco (od lewej):</p>
+<ul>
+<li><a href="https://www.linkedin.com/in/norbert-olkowski/">Norbert Olkowski</a></li>
+<li>Jakub Ziomek</li>
+<li><a href="https://www.linkedin.com/in/bartlomiejwajdzik">Bartłomiej Wajdzik</a></li>
+<li>Jakub Szpunar</li>
+<li><a href="https://www.linkedin.com/in/daniel-olczyk/">Daniel Olczyk</a></li>
+<li><a href="https://www.linkedin.com/in/kawieki/">Łukasz Wiszniewski</a></li>
+</ul>
+<p><img src="/img/hackyeah-2025/druzyna_golphins.jpg" alt="Zespół &quot;Golphins&quot;" title="Golphins to my!" /></p>
+<p>Nazwa drużyny powstała spontanicznie - pochodziła od mojej czapki, którą miałem na sobie, gdy mentorzy poprosili nas o podanie nazwy zespołu, zanim jeszcze zdążyliśmy wspólnie coś ustalić.</p>
+<p><img src="/img/hackyeah-2025/czapka.jpg" alt="Moja czapka" title="Tak właśnie wyglądała moja czapka" /></p>
+<p>Gdy zegar wybił 12:00, rozpoczęliśmy oficjalne wyzwanie. Najpierw dokładnie zapoznaliśmy się z opisem zadań i wspólnie przeanalizowaliśmy możliwe kierunki realizacji. Pierwsze dwie godziny poświęciliśmy głównie na research oraz wysłuchanie wybranych prelekcji: <a href="https://hackyeah.pl/lecture_conference_2025#id=103148">"Otwarte dane – paliwo dla miejskich aplikacji" Pawła Schmidta</a> oraz <a href="https://hackyeah.pl/lecture_conference_2025#id=102559">"Czy w transporcie publicznym pasażerowie mogą mieć realny wpływ na opóźnienia?" Marcina Podolaka</a>, które pomogły nam lepiej zrozumieć oczekiwania partnerów. To był spokojny, ale bardzo ważny moment przed właściwym wysiłkiem.</p>
+<h2 id="wybor-tematu-i-dalsze-prace"><a class="header-anchor no-hover-padding" href="#wybor-tematu-i-dalsze-prace" aria-label="Anchor link for: wybor-tematu-i-dalsze-prace"><span class="link-icon" aria-hidden="true"></span></a>
+Wybór tematu i dalsze prace</h2>
+<p>Zdecydowaliśmy się na realizację tematu <a href="https://hackyeah.pl/tasks/DETAILS_Malopolska_Journey_Radar.pdf">Journey Radar</a>, który najbardziej pasował do naszych pomysłów. Początkowe godziny pracy nie należały jednak do łatwych - przez pierwsze siedem godzin zmagaliśmy się z wieloma problemami technicznymi. Słabe łącze Wi-Fi utrudniało pobieranie modeli <a href="https://gtfs.org/">GTFS</a>, pojawiały się momenty klasycznego overengineeringu rozwiązania, a do tego doszły problemy z zalogowaniem się do konta w Microsoft Azure.</p>
+<p>Na szczęście równolegle rozwijał się frontend - dzięki temu czas nie był całkowicie stracony. Gdy w końcu udało się uruchomić zdalną bazę danych i przeprowadzić pierwsze migracje, projekt nabrał tempa.</p>
+<p>Około godziny 20:00 należało przygotować wstępne zgłoszenie, zawierające nazwę projektu, krótki opis, nazwę zespołu oraz jego skład. Po krótkiej burzy mózgów zdecydowaliśmy się na nazwę "PulseTransit", która została z nami do końca hackathonu.</p>
+<p>Po formalnościach mogliśmy wreszcie w pełni skupić się na backendzie i testowaniu naszego modelu. Prace zaczęły przebiegać płynniej, a zespół nabierał rytmu - przed nami była długa noc kodowania.</p>
+<h2 id="druga-polowa-wyzwania"><a class="header-anchor no-hover-padding" href="#druga-polowa-wyzwania" aria-label="Anchor link for: druga-polowa-wyzwania"><span class="link-icon" aria-hidden="true"></span></a>
+Druga połowa wyzwania</h2>
+<p><img src="/img/hackyeah-2025/widok_z_gory.jpg" alt="Widok z trybun" title="Widok na nasz stół z trybun" /></p>
+<p>Po północy tempo pracy wcale nie spadło - wręcz przeciwnie, nabrało rozpędu. Mimo zmęczenia kolejne godziny upływały pod znakiem intensywnego kodowania i wdrażania nowych funkcjonalności. Backend rozrastał się o kolejne endpointy, a aplikacja webowa przestała być jedynie mockupem, lecz zaczęła prezentować realne dane i pobierać realne dane z serwera.</p>
+<p>Przygotowywaliśmy też infrastrukturę pod prezentację, dbając o to, by całość działała stabilnie. W tle nie brakowało muzycznego wsparcia - puszczony przez organizatorów <a href="https://www.youtube.com/watch?v=UaCUE33zZmM">"Ratata"</a> co godzinę dodawał energii, a widok uczestników tańczących belgijkę skutecznie podtrzymywał morale.</p>
+<p>Część zespołu pozwoliła sobie na krótką drzemkę, inni działali bez przerwy. Pomimo upływu czasu i rosnącego zmęczenia, skupienie nie malało. Udało nam się zaimplementować model raportowania sytuacji w trakcie podróży, który klasyfikował zgłoszenia użytkowników i oceniał ich wiarygodność w oparciu o dane z innych raportów.</p>
+<p>Ostatnia godzina okazała się najbardziej intensywna - dopracowywaliśmy prezentację, uzupełnialiśmy opis projektu, wdrażaliśmy rozwiązanie na serwer i przenosiliśmy model klasyfikacji na środowisko testowe. Udało się domknąć wszystko dosłownie dwie minuty przed końcem hackathonu. Wysłaliśmy zgłoszenie, odetchnęliśmy głęboko i po raz pierwszy od wielu godzin mogliśmy na chwilę się rozluźnić.</p>
+<h2 id="projekt-pulsetransit"><a class="header-anchor no-hover-padding" href="#projekt-pulsetransit" aria-label="Anchor link for: projekt-pulsetransit"><span class="link-icon" aria-hidden="true"></span></a>
+Projekt „PulseTransit”</h2>
+<p>Aplikacja, która pomaga osobom podróżującym po Małopolsce dotrzeć z punktu A do punktu B z możliwie najmniejszymi opóźnieniami. System analizuje dane o transporcie publicznym oraz zgłoszenia użytkowników, by w razie utrudnień zaproponować alternatywne trasy ze środkami transportu.</p>
+<p>Użytkownicy mogą raportować zdarzenia takie jak korki, wypadki czy zatłoczenie pojazdów, a aplikacja klasyfikuje je i weryfikuje w tle, porównując z innymi zgłoszeniami. Gdy dane się pokrywają, system automatycznie generuje komunikaty oraz rekomenduje inne opcje podróży.</p>
+<p>W trakcie hackathonu udało nam się stworzyć w pełni działające MVP, obejmujące backend, klasyfikację zgłoszeń oraz wdrożenie aplikacji na serwer demonstracyjny.</p>
+<p>Przykładowe wykorzystane technologie:</p>
+<ul>
+<li>Backend: ASP.NET Core Web API, Entity Framework Core, PostgreSQL, MediatR, Mapperly</li>
+<li>Frontend: Figma make, React, Vite, radix-ui, lucide</li>
+<li>AI: Python, FastAPI, pyproj, contextlib, BeautifulSoup, requests, pandas, partridge</li>
+<li>Dane: GTFS (ZTP Kraków)</li>
+</ul>
+<p>Interfejs aplikacji zaprojektowaliśmy w Figmie, a poniżej znajduje się wizualizacja połączonych ekranów prezentująca najważniejsze funkcjonalności projektu:</p>
+<p><img src="/img/hackyeah-2025/aplikacja.png" alt="Finałowa wersja aplikacji" /></p>
+<p>Kod źródłowy jest dostępny w repozytorium na <a href="https://github.com/Rust-Lab-PJATK/hackyeah-25-journey-radar">GitHubie</a>, natomiast prezentację możecie ujrzeć <a href="/blob/hackyeah-2025/PulseTransit.pdf">pod tym linkiem</a>.</p>
+<h2 id="finalny-werdykt"><a class="header-anchor no-hover-padding" href="#finalny-werdykt" aria-label="Anchor link for: finalny-werdykt"><span class="link-icon" aria-hidden="true"></span></a>
+Finalny werdykt</h2>
+<p>Na ogłoszenie wyników czekaliśmy do 15:00, gdy organizatorzy opublikowali listę zespołów zakwalifikowanych do finału. Atmosfera była pełna napięcia - po ponad dobie intensywnej pracy każdy z nas z niecierpliwością czekał na informację na discordzie licząc, że zobaczy tam nazwę  swojego zespołu.</p>
+<p>Tym razem jednak szczęście nie było po naszej stronie - nie znaleźliśmy się wśród finalistów. Mimo tego poczuliśmy satysfakcję z tego, co udało nam się osiągnąć w tak krótkim czasie. Nasze rozwiązanie działało oraz najważniejsze elementy zostały dowiezione  - to już samo w sobie było sporym sukcesem.</p>
+<p>Finalnie w tym temacie zwyciężył zespół Solvrownicy w piaskownicy od <a href="https://solvro.pwr.edu.pl/en/">KN Solvro</a>, a drugie miejsce zajął zespół MIKOxC(offe)++. Wielkie gratulacje dla obu zespołów!</p>
+<h2 id="wrazenia-po-wydarzeniu"><a class="header-anchor no-hover-padding" href="#wrazenia-po-wydarzeniu" aria-label="Anchor link for: wrazenia-po-wydarzeniu"><span class="link-icon" aria-hidden="true"></span></a>
+Wrażenia po wydarzeniu</h2>
+<p><img src="/img/hackyeah-2025/arena.jpg" alt="TAURON Arena wypełniona aż po przegi" /></p>
+<p>To wydarzenie udowodniło, że jest wyjątkowym miejscem dla pasjonatów tworzenia technologii. Przez 24 godziny uczestnicy z całej Polski wspólnie tworzyli projekty, korzystali ze wsparcia mentorów, wymieniali doświadczenia i ratowali się kawą, gdy zmęczenie dawało o sobie znać. Nocne godziny przyniosły widok dziesiątek osób drzemiących przy laptopach - a mimo to atmosfera pozostawała pełna energii, współpracy i pasji do tworzenia.</p>
+<p>Po zakończeniu hackathonu nasi członkowie wyrazili swoje wrażenia z wydarzenia:</p>
+<h3 id="norbert-olkowski"><a class="header-anchor no-hover-padding" href="#norbert-olkowski" aria-label="Anchor link for: norbert-olkowski"><span class="link-icon" aria-hidden="true"></span></a>
+Norbert Olkowski</h3>
+<blockquote>
+<p>HackYeah znowu zrobił swoje: brak snu, hektolitry kofeiny i mnóstwo satysfakcji!  Mega inspirujący weekend, świetni ludzie, genialna atmosfera i tona pomysłów na przyszłość.</p>
+</blockquote>
+<h3 id="lukasz-wiszniewski"><a class="header-anchor no-hover-padding" href="#lukasz-wiszniewski" aria-label="Anchor link for: lukasz-wiszniewski"><span class="link-icon" aria-hidden="true"></span></a>
+Łukasz Wiszniewski</h3>
+<blockquote>
+<p>Jeden z lepszych treningów psychiki, wytrzymałości, 24h walki z kodem i niesfornymi błędami sklejania aplikacji, podczas gdy z tyłu atakowała chęć powrotu do domu po dawce snu. Ciekawe i budujące doświadczenie, sama atmosfera była niesamowita - w szczególności, jak się patrzyło na ponad 2 tysięcy ludzi budujących swoje projekty. Nie ma co zbytnio rozpisywać się, to po prostu trzeba doświadczyć na własnej skórze.</p>
+</blockquote>
+<h3 id="daniel-olczyk"><a class="header-anchor no-hover-padding" href="#daniel-olczyk" aria-label="Anchor link for: daniel-olczyk"><span class="link-icon" aria-hidden="true"></span></a>
+Daniel Olczyk</h3>
+<blockquote>
+<p>Całe te wydarzenie przypomniało za co lubię tego typu stacjonarne wydarzenia: 24h pisania losowych ciągów na klawiaturze, dyskusje w drużynach, sporej dawki kofeiny, słuchania “Ratata”, które dawało motywację do rozwijania projektu no i praktycznie bez żadnego snu. Klimat robił tutaj największe znaczenie - zebranych ponad 2 tyś osób w jednym miejscu, aby stworzyć coś ciekawego, a później w nocy, gdy na korytarzach/stanowiskach można było ujrzeć drzemiących ludzi. Satysfakcja, gdy dowiozło projekt do końca była po prostu niesamowita.</p>
+</blockquote>
+<h2 id="podsumowanie"><a class="header-anchor no-hover-padding" href="#podsumowanie" aria-label="Anchor link for: podsumowanie"><span class="link-icon" aria-hidden="true"></span></a>
+Podsumowanie</h2>
+<p>Choć nie weszliśmy do finału, ten 24 godzinny maraton był dla nas dużym krokiem naprzód. W realnych warunkach zbudowaliśmy działające MVP z backendem, klasyfikacją zgłoszeń i wdrożeniem na serwer, a po drodze ogarnęliśmy problemy z infrastrukturą i łącznością. Największą wartością okazała się zgrana praca zespołu i tempo, w jakim potrafimy podejmować decyzje i dowozić funkcjonalności pod presją czasu.</p>
+<p>Dziękujemy <a href="https://www.linkedin.com/in/bartlomiejwajdzik">Bartłomiejowi Wajdzikowi</a>, Jakubowi Ziomkowi i Jakubowi Szpunarowi za zaufanie, pomoc, wspólnie spędzony czas i świetną współpracę. Wrócimy za rok z konkretnym planem tak, aby wrócić z Krakowa wygraną.</p>
+
+        </section>
+
+        
+        
+        
+
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+        
+
+    </article>
+</main>
+
+    <div id="button-container">
+        
+        
+            <div id="toc-floating-container">
+                <input type="checkbox" id="toc-toggle" class="toggle"/>
+                <label for="toc-toggle" class="overlay"></label>
+                <label for="toc-toggle" id="toc-button" class="button" title="Przełącz spis treść">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M414.82-193.094q-18.044 0-30.497-12.32-12.453-12.319-12.453-30.036t12.453-30.086q12.453-12.37 30.497-12.37h392.767q17.237 0 29.927 12.487 12.69 12.486 12.69 30.203 0 17.716-12.69 29.919t-29.927 12.203H414.82Zm0-244.833q-18.044 0-30.497-12.487Q371.87-462.9 371.87-480.45t12.453-29.92q12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.511 12.69 12.512 12.69 29.845 0 17.716-12.69 30.086-12.69 12.37-29.927 12.37H414.82Zm0-245.167q-18.044 0-30.497-12.32t-12.453-30.037q0-17.716 12.453-30.086 12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.486 12.69 12.487 12.69 30.203 0 17.717-12.69 29.92-12.69 12.203-29.927 12.203H414.82ZM189.379-156.681q-32.652 0-55.878-22.829t-23.226-55.731q0-32.549 23.15-55.647 23.151-23.097 55.95-23.097 32.799 0 55.313 23.484 22.515 23.484 22.515 56.246 0 32.212-22.861 54.893-22.861 22.681-54.963 22.681Zm0-245.167q-32.652 0-55.878-23.134-23.226-23.135-23.226-55.623 0-32.487 23.467-55.517t56.12-23.03q32.102 0 54.721 23.288 22.62 23.288 22.62 55.775 0 32.488-22.861 55.364-22.861 22.877-54.963 22.877Zm-.82-244.833q-32.224 0-55.254-23.288-23.03-23.289-23.03-55.623 0-32.333 23.271-55.364 23.272-23.03 55.495-23.03 32.224 0 55.193 23.288 22.969 23.289 22.969 55.622 0 32.334-23.21 55.364-23.21 23.031-55.434 23.031Z"/></svg>
+                </label>
+                <div class="toc-content">
+                    
+
+<div class="toc-container">
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#poczatek-wydarzenia">Początek wydarzenia</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#formowanie-zespolu-i-start-pracy">Formowanie zespołu i start pracy</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#wybor-tematu-i-dalsze-prace">Wybór tematu i dalsze prace</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#druga-polowa-wyzwania">Druga połowa wyzwania</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#projekt-pulsetransit">Projekt „PulseTransit”</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#finalny-werdykt">Finalny werdykt</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#wrazenia-po-wydarzeniu">Wrażenia po wydarzeniu</a>
+                    
+                        <ul>
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#norbert-olkowski">Norbert Olkowski</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#lukasz-wiszniewski">Łukasz Wiszniewski</a>
+                                        
+                                    </li>
+                                
+                            
+                                
+                                    <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#daniel-olczyk">Daniel Olczyk</a>
+                                        
+                                    </li>
+                                
+                            
+                        </ul>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/hackyeah-2025/#podsumowanie">Podsumowanie</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+            </div>
+        
+
+        
+        
+
+        
+        <a href="#" id="top-button" class="no-hover-padding" title="Przejdź na początek strony">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"/></svg>
+        </a>
+    </div>
+
+
+<link rel="stylesheet" href="https://rust-lab-pjatk.github.io/katex.min.css">
+    <script defer src="https://rust-lab-pjatk.github.io/js/katex.min.js"></script><script defer src="https://rust-lab-pjatk.github.io/js/mermaid.min.js"></script><span id="copy-success" class="hidden">
+        Skopiowano!
+    </span>
+    <span id="copy-init" class="hidden">
+        Skopiuj kod do schowka
+    </span>
+    <script defer src="https://rust-lab-pjatk.github.io/js/copyCodeToClipboard.min.js"></script>
+
+
+    </div>
+    <footer>
+    <section>
+        <nav class="socials nav-navs"><ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="mailto:rustlab@pjwstk.edu.pl">
+                                    <img loading="lazy" alt="email" title="email" src="https://rust-lab-pjatk.github.io/social_icons/email.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://github.com/Rust-Lab-PJATK">
+                                    <img loading="lazy" alt="github" title="github" src="https://rust-lab-pjatk.github.io/social_icons/github.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.linkedin.com/company/rust-lab-pjatk">
+                                    <img loading="lazy" alt="linkedin" title="linkedin" src="https://rust-lab-pjatk.github.io/social_icons/linkedin.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.instagram.com/rustlabpjatk">
+                                    <img loading="lazy" alt="instagram" title="instagram" src="https://rust-lab-pjatk.github.io/social_icons/instagram.svg">
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            
+        </nav>
+
+        
+        <nav class="nav-navs">
+        </nav>
+
+        <div class="credits">
+            <small>
+                
+    
+    
+    
+    
+        
+    
+        
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    <p><p>© 2026 Rust Lab PJATK • Materiały na tej stronie są udostępniane na licencji <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p>
+</p>
+
+                
+                Strona oparta na oprogramowaniu
+                <a rel=""  href="https://www.getzola.org">Zola</a>
+                i
+                <a rel=""  href="https://github.com/welpo/tabi">tabi</a>
+
+                </small>
+        </div>
+    </section>
+
+    </footer>
+
+</body>
+
+</html>

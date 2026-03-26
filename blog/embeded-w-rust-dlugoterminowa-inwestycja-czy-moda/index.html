@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pl" >
+
+<head>
+    <meta charset="UTF-8"><meta http-equiv="Content-Security-Policy"
+content="default-src 'self';font-src &#x27;self&#x27; data: 'self';img-src &#x27;self&#x27; https:&#x2F;&#x2F;* data:;media-src &#x27;self&#x27;;style-src &#x27;self&#x27; 'unsafe-inline';frame-src player.vimeo.com https:&#x2F;&#x2F;www.youtube-nocookie.com;connect-src 'self';script-src 'self' 'self'">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="base" content="https://rust-lab-pjatk.github.io">
+
+    
+    <title>Rust Lab PJATK • Rust w systemach wbudowanych – długoterminowa inwestycja czy moda?</title>
+
+    
+    
+    
+        <link rel=icon href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50%" x="50%" dominant-baseline="central" text-anchor="middle" font-size="88">🦀</text></svg>'>
+    
+
+    
+    
+
+    
+    
+    
+        
+            <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/custom_subset.css?h=0b9535a28bc3d5bf2321">
+        
+    
+
+    
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/main.css?h=5761abda13287149cf75" />
+        <link rel="stylesheet" href="https://rust-lab-pjatk.github.io/skins/pjatk.css?h=14166792eb0b5e4e3507" />
+
+    <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="#e30613" />
+        <meta name="description" content="Praktyczne spojrzenie na Rust w systemach wbudowanych" />
+        <meta property="og:description" content="Praktyczne spojrzenie na Rust w systemach wbudowanych" />
+
+    
+
+    <meta property="og:title" content="Rust w systemach wbudowanych – długoterminowa inwestycja czy moda?" />
+    <meta property="og:type" content="article" />
+
+    
+<meta property="og:locale" content="pl_PL" />
+
+    <meta property="og:url" content="https:&#x2F;&#x2F;rust-lab-pjatk.github.io&#x2F;blog&#x2F;embeded-w-rust-dlugoterminowa-inwestycja-czy-moda&#x2F;" /><meta property="og:site_name" content="Rust Lab PJATK">
+        <noscript><link rel="stylesheet" href="https://rust-lab-pjatk.github.io/no_js.css"/></noscript>
+        <script type="text/javascript" src="https://rust-lab-pjatk.github.io/js/initializeTheme.min.js"></script>
+        <script defer src="https://rust-lab-pjatk.github.io/js/themeSwitcher.min.js"></script></head>
+
+
+<body>
+    <header>
+    <nav class="navbar">
+        <div class="nav-title">
+            <a class="home-title" href="https://rust-lab-pjatk.github.io">Rust Lab PJATK</a>
+        </div>
+            <div class="nav-navs">
+                <ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/blog/">Blog
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/tags/">Tagi
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding" href="https://rust-lab-pjatk.github.io/archiwum/">Archiwum
+                                </a>
+                            </li>
+                        <li class="menu-icons-container">
+                        <ul class="menu-icons-group">
+                            
+
+                            
+                            
+
+                            <li class="theme-switcher-wrapper js"><div
+        title="Przełącz ciemny&#x2F;jasny motyw"
+        class="theme-switcher"
+        tabindex="0"
+        role="button"
+        aria-label="Przełącz ciemny motyw"
+        aria-pressed="false">
+    </div><div
+        title="Przywróć domyślny motyw"
+        class="theme-resetter arrow"
+        tabindex="0"
+        role="button"
+        aria-hidden="true"
+        aria-label="Przywróć domyślny motyw">
+    </div>
+
+</li>
+</ul>
+                    </li>
+                </ul>
+            </div>
+        
+    </nav>
+</header>
+
+    <div class="content">
+
+        
+        
+
+
+
+
+<main>
+    <article>
+        <h1 class="article-title">
+            Rust w systemach wbudowanych – długoterminowa inwestycja czy moda?
+        </h1>
+
+        <ul class="meta"><li>Autorzy: Daniel Olczyk</li>
+                <li><span class='separator' aria-hidden='true'>•</span>21 lis 2025</li><li title="Słowa: 1064"><span class='separator' aria-hidden='true'>•</span>Czas czytania (w minutach): 6</li><li class="tag"><span class='separator' aria-hidden='true'>•</span>Tagi:&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/embedded/">embedded</a>,&nbsp;</li><li class="tag"><a href="https://rust-lab-pjatk.github.io/tags/arduino/">arduino</a></li>
+        </ul>
+            
+
+<div class="toc-container">
+    
+        <h3>Spis treści</h3>
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#co-to-systemy-wbudowane">Co to systemy wbudowane?</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#platformy-klucz-do-rozwiazania-problemu">Platformy – klucz do rozwiązania problemu</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#dostepnosc-bibliotek-dla-poszczegolnych-platform">Dostępność bibliotek dla poszczególnych platform</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#biblioteki-dla-popularnych-komponentow">Biblioteki dla popularnych komponentów</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#roznice-miedzy-trybami-std-i-no-std">Różnice między trybami std i no-std</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#zalety-i-wady-korzystania-z-rust">Zalety i wady korzystania z Rust</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#porownanie-kodu-c-i-rust">Porównanie kodu C++ i Rust</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#moje-doswiadczenia">Moje doświadczenia</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#slowem-podsumowania">Słowem podsumowania</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+        
+
+        <section class="body"><p><img src="/img/embeded-w-rust/banner.jpg" alt="banner" /></p>
+<p>Od czasów powstania Rust jako konkurencyjnego języka do znanych języków kompilujących się do kodu maszynowego, nie miał on początkowo szerokiego grona zwolenników. Jednak z każdym rokiem popularność rosła, a język ze swym charakterystycznym logo kraba zdobywał coraz bardziej znaczące miejsce w społeczności (zajmując pierwsze miejsca w ankiecie Stack Overflow w kategorii „ulubiony język”). Od 2020 roku Rust zwrócił uwagę gigantów technologicznych takich jak Microsoft czy Google, które zaczęły wdrażać go w swoich produktach.</p>
+<p>W społeczności systemów wbudowanych widać rosnące wsparcie dla narzędzi i platform umożliwiających kompilowanie i uruchamianie programów w Rust. W tym artykule przedstawię dostępne rozwiązania, platformy, wady i zalety korzystania z Rust w systemach wbudowanych, porównam kod C++ i Rust, a także podzielę się własnymi doświadczeniami.</p>
+<h2 id="co-to-systemy-wbudowane"><a class="header-anchor no-hover-padding" href="#co-to-systemy-wbudowane" aria-label="Anchor link for: co-to-systemy-wbudowane"><span class="link-icon" aria-hidden="true"></span></a>
+Co to systemy wbudowane?</h2>
+<p>Systemy wbudowane w dużym skrócie to specjalizowane komputery przeznaczone do konkretnych zadań. Zazwyczaj są to mikrokontrolery, które znajdują zastosowanie na przykład w:</p>
+<ul>
+<li><strong>samochodach</strong> – czujniki temperatury, systemy zarządzania drzwiami</li>
+<li><strong>urządzeniach IoT</strong> (ang. Internet of Things) – inteligentne systemy, np. taśmy LED, żarówki inteligentne, inteligentne gniazdka</li>
+<li><strong>sprzęcie RTV/AGD</strong> – sterują poszczególnymi funkcjami, np. w pralce wyborem programu prania wybranego przez użytkownika</li>
+</ul>
+<p>Takie systemy wbudowane służą do wykonywania prostych algorytmów, gdzie każda operacja musi być jak najbardziej zoptymalizowana, ponieważ te układy mają ograniczone zasoby: słaby procesor i niewielką pamięć RAM oraz ROM.</p>
+<h2 id="platformy-klucz-do-rozwiazania-problemu"><a class="header-anchor no-hover-padding" href="#platformy-klucz-do-rozwiazania-problemu" aria-label="Anchor link for: platformy-klucz-do-rozwiazania-problemu"><span class="link-icon" aria-hidden="true"></span></a>
+Platformy – klucz do rozwiązania problemu</h2>
+<p>Istnieje wiele rodzajów mikrokontrolerów tzw. platform, które mają zastosowanie w różnych dziedzinach. Oto kilka liderów branży:</p>
+<ul>
+<li>Arduino</li>
+<li>Espressif</li>
+<li>Raspberry Pi Pico</li>
+<li>STM32</li>
+</ul>
+<p>Bardziej zaawansowane platformy mają większą moc obliczeniową i mogą uruchamiać wymagające systemy operacyjne, takie jak GNU/Linux:</p>
+<ul>
+<li>Raspberry Pi</li>
+<li>Orange Pi</li>
+<li>Banana Pi</li>
+</ul>
+<p>Jak widać, wybór jest ogromny. Wszystkie te platformy mają wbudowane API (ang. Application Programming Interface), które umożliwia komunikację z GPIO (ang. General-Purpose Input/Output) – interfejsem odpowiedzialnym za komunikację z urządzeniami zewnętrznymi poprzez piny na płytce.</p>
+<h2 id="dostepnosc-bibliotek-dla-poszczegolnych-platform"><a class="header-anchor no-hover-padding" href="#dostepnosc-bibliotek-dla-poszczegolnych-platform" aria-label="Anchor link for: dostepnosc-bibliotek-dla-poszczegolnych-platform"><span class="link-icon" aria-hidden="true"></span></a>
+Dostępność bibliotek dla poszczególnych platform</h2>
+<p>Wsparcie różnych platform w Rust to temat, który można dyskutować długo. Dobrym przykładem jest Espressif – firma produkująca stosunkowo tanie mikrokontrolery z wbudowanym modułem Wi-Fi. Od kilku lat oferuje własne narzędzia ułatwiające tworzenie rozwiązań IoT dla swoich platform (<a href="https://github.com/esp-rs">https://github.com/esp-rs</a>). W przypadku Arduino użytkownik <a href="https://github.com/Rahix">Rahix</a> utworzył abstrakcyjną warstwę sprzętową (HAL) do interakcji z komponentami na płytce, dostępną w repozytorium <a href="https://github.com/Rahix/avr-hal">avr-hal</a>. Sytuacja z Raspberry Pi jest bardziej złożona. Wystarczy użyć standardowego toolchaina Linux, ale komunikacja z GPIO wymaga odpowiedniej biblioteki. Niestety, najpopularniejszy crate <a href="https://github.com/golemparts/rppal">rppal</a> nie otrzymuje już wsparcia ze strony autora, co może prowadzić do braku poprawek błędów i nowych funkcji. Jednak ze względu na to, że projekt ma otwarte źródła, istnieje szansa na podtrzymanie go przez społeczność.</p>
+<h2 id="biblioteki-dla-popularnych-komponentow"><a class="header-anchor no-hover-padding" href="#biblioteki-dla-popularnych-komponentow" aria-label="Anchor link for: biblioteki-dla-popularnych-komponentow"><span class="link-icon" aria-hidden="true"></span></a>
+Biblioteki dla popularnych komponentów</h2>
+<p>Czy będą dostępne biblioteki do sterowania taśmami LED czy wyświetlaczami LCD? Na szczęście, dla popularnych komponentów takie biblioteki istnieją: <a href="https://github.com/ahdinosaur/blinksy">blinksy</a>, <a href="https://github.com/embedded-graphics/embedded-graphics">embedded-graphics</a>, <a href="https://github.com/Caemor/epd-waveshare">epd-waveshare</a>. Obsługują one zarówno tryb <code>no-std</code>, jak i <code>std</code>.</p>
+<h2 id="roznice-miedzy-trybami-std-i-no-std"><a class="header-anchor no-hover-padding" href="#roznice-miedzy-trybami-std-i-no-std" aria-label="Anchor link for: roznice-miedzy-trybami-std-i-no-std"><span class="link-icon" aria-hidden="true"></span></a>
+Różnice między trybami std i no-std</h2>
+<p>Zgodnie z dokumentacją Rust – <code>no-std</code> oznacza, że biblioteka standardowa nie będzie dołączona do kompilacji, co powoduje, że nie możemy używać operacji I/O, asynchronicznych operacji, timingowania ani struktur alokujących pamięć dynamicznie (takich jak <code>Vec</code>, <code>HashMap</code>, <code>String</code>). W systemach wbudowanych jest to normalne, ponieważ zwykle brakuje systemu operacyjnego, który by obsługiwał te operacje. Istnieją jednak rozwiązania, jak systemy operacyjne <a href="https://www.freertos.org/">FreeRTOS</a>, które umożliwiają korzystanie z tych struktur. Programiści znający Arduino wiedzą, że inicjalizacja <code>String</code> wymaga podania długości, ponieważ allokuje pamięć dynamicznie na stercie, a nie na stosie.</p>
+<p>Z kolei <code>std</code> jest całkowitym przeciwieństwem <code>no-std</code> i obsługuje zaawansowane struktury danych alokujące pamięć dynamicznie, takie jak <code>Vec</code>, <code>HashMap</code> aż po wspracie asynchronicznych operacji.</p>
+<p>Poniżej porównanie trybów:</p>
+<table><thead><tr><th><code>std</code></th><th><code>no-std</code></th></tr></thead><tbody>
+<tr><td>Dostęp do funkcjonalności systemu operacyjnego</td><td>Brak dostępu</td></tr>
+<tr><td>Dynamiczne struktury danych (<code>Vec</code>, <code>HashMap</code>, itd.)</td><td>Ograniczone – można zaimplementować własne algorytmy alokacji</td></tr>
+<tr><td>Automatyczna ochrona stosu i obsługa <code>panic!</code></td><td>Ręczna obsługa wymagana</td></tr>
+<tr><td>Wsparcie wielowątkowości</td><td>Brak wsparcia wielowątkowości</td></tr>
+</tbody></table>
+<h2 id="zalety-i-wady-korzystania-z-rust"><a class="header-anchor no-hover-padding" href="#zalety-i-wady-korzystania-z-rust" aria-label="Anchor link for: zalety-i-wady-korzystania-z-rust"><span class="link-icon" aria-hidden="true"></span></a>
+Zalety i wady korzystania z Rust</h2>
+<p>Rust oferuje kilka istotnych zalet:</p>
+<ul>
+<li><strong>Bezpieczeństwo pamięci</strong> – mechanizmy takie jak borrow checker i ownership zapobiegają powstawaniu tzw. <a href="https://en.wikipedia.org/wiki/Undefined_behavior">Undefined Behavior</a> przed uruchomieniem programu</li>
+<li><strong>Bezpieczna współbieżność</strong> – system typów zapobiega data racingu już na etapie kompilacji</li>
+<li><strong>Przyjazna składnia</strong> – system modułów, pattern matching i bezpieczne makra to tylko niektóre cechy</li>
+<li><strong>„Kompilator to twój najlepszy przyjaciel”</strong> – komunikaty błędów kompilatora są jasne i klarowne, często zawierają sugestie rozwiązań</li>
+</ul>
+<p>Nie obejdziemy się jednak bez pewnych wad:</p>
+<ul>
+<li><strong>Duży rozmiar binarki</strong> – mimo postępów, skompilowany program zajmuje znacznie miejsca. W praktyce zwykle jest to akceptowalne (4 MB pamięci jest czasem wystarczające), ale na bardzo ograniczonych platformach może być problemem</li>
+<li><strong>Ograniczona liczba bibliotek</strong> – nie wszystkie komponenty mają natywne sterowniki w Rust. Czasami konieczne jest wywoływanie zaimplementowanych funkcjonalności z C/C++</li>
+<li><strong>Czas kompilacji</strong> – kompilacja i wgranie na płytkę może zająć więcej czasu</li>
+<li><strong>Mniejsza społeczność</strong> – ekosystem jest mniejszy, ale z roku na rok się rozwija</li>
+</ul>
+<h2 id="porownanie-kodu-c-i-rust"><a class="header-anchor no-hover-padding" href="#porownanie-kodu-c-i-rust" aria-label="Anchor link for: porownanie-kodu-c-i-rust"><span class="link-icon" aria-hidden="true"></span></a>
+Porównanie kodu C++ i Rust</h2>
+<p>Przykładowy kod został oparty na podstawowym programie „Hello, World!”, w którym zmieniamy stan wbudowanej diody LED co sekundę, aby uzyskać efekt migania. Poniżej znajduje się kod w C++, korzystający z frameworka Arduino:</p>
+<pre data-lang="cpp" class="language-cpp z-code"><code class="language-cpp" data-lang="cpp"><span class="z-source z-c++"><span class="z-storage z-modifier z-c++">const</span> <span class="z-storage z-type z-c">int</span> LED_PIN <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-constant z-numeric z-integer z-decimal z-c++">13</span><span class="z-punctuation z-terminator z-c++">;</span> <span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Pin diody LED wbudowanej w płytce
+</span></span><span class="z-source z-c++"><span class="z-storage z-modifier z-c++">const</span> <span class="z-storage z-type z-c">int</span> BLINK_DELAY <span class="z-keyword z-operator z-assignment z-c">=</span> <span class="z-constant z-numeric z-integer z-decimal z-c++">1000</span><span class="z-punctuation z-terminator z-c++">;</span> <span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> 1000ms = 1s
+</span></span><span class="z-source z-c++">
+</span><span class="z-source z-c++"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c++"><span class="z-meta z-toc-list z-full-identifier z-c++"><span class="z-entity z-name z-function z-c++">setup</span></span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-meta z-function z-c++"> </span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Konfigurujemy pin odpowiedzialny za diodę LED na płytce
+</span></span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-meta z-function-call z-c++"><span class="z-variable z-function z-c++">pinMode</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++">LED_PIN<span class="z-punctuation z-separator z-c++">,</span> OUTPUT</span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  Serial<span class="z-punctuation z-accessor z-dot z-c++">.</span><span class="z-meta z-method-call z-c++"><span class="z-variable z-function z-member z-c++">begin</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-method-call z-c++"><span class="z-meta z-group z-c++"><span class="z-constant z-numeric z-integer z-decimal z-c++">9600</span></span></span><span class="z-meta z-method-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"></span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+</span><span class="z-source z-c++">
+</span><span class="z-source z-c++"><span class="z-storage z-type z-c">void</span> <span class="z-meta z-function z-c++"><span class="z-meta z-toc-list z-full-identifier z-c++"><span class="z-entity z-name z-function z-c++">loop</span></span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function z-parameters z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-meta z-function z-c++"> </span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-begin z-c++">{</span></span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Ustawiamy wysokie napięcie dla diody LED
+</span></span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-meta z-function-call z-c++"><span class="z-variable z-function z-c++">digitalWrite</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++">LED_PIN<span class="z-punctuation z-separator z-c++">,</span> HIGH</span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  Serial<span class="z-punctuation z-accessor z-dot z-c++">.</span><span class="z-meta z-method-call z-c++"><span class="z-variable z-function z-member z-c++">println</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-method-call z-c++"><span class="z-meta z-group z-c++"><span class="z-string z-quoted z-double z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&quot;</span>LED -&gt; ON<span class="z-punctuation z-definition z-string z-end z-c">&quot;</span></span></span></span><span class="z-meta z-method-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Dajemy 1s opóźnienia pomiędzy przełączaniem stanu diody
+</span></span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-meta z-function-call z-c++"><span class="z-variable z-function z-c++">delay</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++">BLINK_DELAY</span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Ustawiamy niskie napięcie dla diody LED
+</span></span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-meta z-function-call z-c++"><span class="z-variable z-function z-c++">digitalWrite</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++">LED_PIN<span class="z-punctuation z-separator z-c++">,</span> LOW</span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  Serial<span class="z-punctuation z-accessor z-dot z-c++">.</span><span class="z-meta z-method-call z-c++"><span class="z-variable z-function z-member z-c++">println</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-method-call z-c++"><span class="z-meta z-group z-c++"><span class="z-string z-quoted z-double z-c"><span class="z-punctuation z-definition z-string z-begin z-c">&quot;</span>LED &lt;- OFF<span class="z-punctuation z-definition z-string z-end z-c">&quot;</span></span></span></span><span class="z-meta z-method-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-comment z-line z-double-slash z-c"><span class="z-punctuation z-definition z-comment z-c">//</span> Dajemy 1s opóźnienia pomiędzy przełączaniem stanu diody
+</span></span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++">  <span class="z-meta z-function-call z-c++"><span class="z-variable z-function z-c++">delay</span><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-begin z-c++">(</span></span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++">BLINK_DELAY</span></span><span class="z-meta z-function-call z-c++"><span class="z-meta z-group z-c++"><span class="z-punctuation z-section z-group z-end z-c++">)</span></span></span><span class="z-punctuation z-terminator z-c++">;</span>
+</span></span></span><span class="z-source z-c++"><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"></span></span><span class="z-meta z-function z-c++"><span class="z-meta z-block z-c++"><span class="z-punctuation z-section z-block z-end z-c++">}</span></span></span>
+</span></code></pre>
+<p>A tutaj Rust, który używa crate'a <code>arduino_hal</code>:</p>
+<pre data-lang="rust" class="language-rust z-code"><code class="language-rust" data-lang="rust"><span class="z-source z-rust"><span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#!</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">no_std</span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span><span class="z-source z-rust"><span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#!</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">no_main</span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> <span class="z-meta z-path z-rust">arduino_hal<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">prelude<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-keyword z-operator z-arithmetic z-rust">*</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust"><span class="z-keyword z-other z-rust">use</span> panic_halt <span class="z-keyword z-operator z-rust">as</span> <span class="z-keyword z-operator z-rust">_</span><span class="z-punctuation z-terminator z-rust">;</span>
+</span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-storage z-type z-rust">const</span> <span class="z-constant z-other z-rust">BLINK_DELAY</span><span class="z-punctuation z-separator z-rust">:</span> <span class="z-storage z-type z-rust">u32</span> <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-constant z-numeric z-integer z-decimal z-rust">1000</span><span class="z-punctuation z-terminator z-rust">;</span> <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> 1000ms = 1s
+</span></span><span class="z-source z-rust">
+</span><span class="z-source z-rust"><span class="z-meta z-annotation z-rust"><span class="z-punctuation z-definition z-annotation z-rust">#</span><span class="z-punctuation z-section z-group z-begin z-rust">[</span><span class="z-variable z-annotation z-rust">arduino_hal</span>::<span class="z-variable z-annotation z-rust">entry</span><span class="z-punctuation z-section z-group z-end z-rust">]</span></span>
+</span><span class="z-source z-rust"><span class="z-meta z-function z-rust"><span class="z-meta z-function z-rust"><span class="z-storage z-type z-function z-rust">fn</span> </span><span class="z-entity z-name z-function z-rust">main</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-begin z-rust">(</span></span><span class="z-meta z-function z-rust"><span class="z-meta z-function z-parameters z-rust"><span class="z-punctuation z-section z-parameters z-end z-rust">)</span></span></span></span><span class="z-meta z-function z-rust"> <span class="z-meta z-function z-return-type z-rust"><span class="z-punctuation z-separator z-rust">-&gt;</span> </span></span><span class="z-keyword z-operator z-logical z-rust">!</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Inicjalizujemy podstawowe rzeczy dla arduino
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> dp <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">arduino_hal<span class="z-punctuation z-accessor z-rust">::</span></span><span class="z-meta z-path z-rust">Peripherals<span class="z-punctuation z-accessor z-rust">::</span></span>take<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> pins <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">arduino_hal<span class="z-punctuation z-accessor z-rust">::</span></span>pins<span class="z-keyword z-operator z-logical z-rust">!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>dp</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Konfigurujemy pin odpowiedzialny za diodę LED na płytce
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> led <span class="z-keyword z-operator z-assignment z-rust">=</span> pins<span class="z-punctuation z-accessor z-dot z-rust">.</span>d13<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">into_output</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Inicjalizujemy zmienną serial dla obsługi wyniku działania programu
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-storage z-type z-rust">let</span> <span class="z-storage z-modifier z-rust">mut</span> serial <span class="z-keyword z-operator z-assignment z-rust">=</span> <span class="z-meta z-path z-rust">arduino_hal<span class="z-punctuation z-accessor z-rust">::</span></span>default_serial<span class="z-keyword z-operator z-logical z-rust">!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span>dp<span class="z-punctuation z-separator z-rust">,</span> pins<span class="z-punctuation z-separator z-rust">,</span> <span class="z-constant z-numeric z-integer z-decimal z-rust">57600</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Odpowiednik void loop() {} z arduino, który nam zapętla wykonywanie programu
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust">    <span class="z-keyword z-control z-rust">loop</span> <span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-begin z-rust">{</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Ustawiamy wysokie napięcie dla diody LED
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      led<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">set_high</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      <span class="z-meta z-path z-rust">ufmt<span class="z-punctuation z-accessor z-rust">::</span></span>uwriteln<span class="z-keyword z-operator z-logical z-rust">!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-keyword z-operator z-bitwise z-rust">&amp;</span><span class="z-storage z-modifier z-rust">mut</span> serial<span class="z-punctuation z-separator z-rust">,</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>LED -&gt; ON<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Dajemy 1s opóźnienia pomiędzy przełączaniem stanu diody
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      <span class="z-meta z-path z-rust">arduino_hal<span class="z-punctuation z-accessor z-rust">::</span></span>delay_ms<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-other z-rust">BLINK_DELAY</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Ustawiamy niske napięcie dla diody LED
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      led<span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">set_low</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      <span class="z-meta z-path z-rust">ufmt<span class="z-punctuation z-accessor z-rust">::</span></span>uwriteln<span class="z-keyword z-operator z-logical z-rust">!</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-keyword z-operator z-bitwise z-rust">&amp;</span><span class="z-storage z-modifier z-rust">mut</span> serial<span class="z-punctuation z-separator z-rust">,</span> <span class="z-string z-quoted z-double z-rust"><span class="z-punctuation z-definition z-string z-begin z-rust">&quot;</span>LED &lt;- OFF<span class="z-punctuation z-definition z-string z-end z-rust">&quot;</span></span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-accessor z-dot z-rust">.</span><span class="z-support z-function z-rust">unwrap</span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      <span class="z-comment z-line z-double-slash z-rust"><span class="z-punctuation z-definition z-comment z-rust">//</span> Dajemy 1s opóźnienia pomiędzy przełączaniem stanu diody
+</span></span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">      <span class="z-meta z-path z-rust">arduino_hal<span class="z-punctuation z-accessor z-rust">::</span></span>delay_ms<span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-begin z-rust">(</span><span class="z-constant z-other z-rust">BLINK_DELAY</span></span><span class="z-meta z-group z-rust"><span class="z-punctuation z-section z-group z-end z-rust">)</span></span><span class="z-punctuation z-terminator z-rust">;</span>
+</span></span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"><span class="z-meta z-block z-rust">    </span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></span><span class="z-source z-rust"><span class="z-meta z-block z-rust"></span><span class="z-meta z-block z-rust"><span class="z-punctuation z-section z-block z-end z-rust">}</span></span>
+</span></code></pre>
+<p>Różnice między implementacjami są relatywnie niewielkie. W C++ inicjalizacja komponentów płytki jest obsługiwana przez framework Arduino, który ukrywa szczegóły implementacji. W Rust musimy sami zainicjalizować peryferia, ale jest to bardzo przejrzyste. Obie implementacje wymagają zdefiniowania głównej pętli programu i obsługi przerwań sprzętowych.</p>
+<h2 id="moje-doswiadczenia"><a class="header-anchor no-hover-padding" href="#moje-doswiadczenia" aria-label="Anchor link for: moje-doswiadczenia"><span class="link-icon" aria-hidden="true"></span></a>
+Moje doświadczenia</h2>
+<p>W moim przypadku wcześniej miałem styczność z frameworkiem Arduino, co ułatwiło mi przejście na narzędzia Espressifa. Dlatego przesiadka na narzędzia od Espressifa w ruście nie były dla mnie ciężkie do ogarnięcia. Nawet konfiguracja wyświetlaczy e-ink przebiegała gładko, ponieważ większość popularnych modeli ma już gotowe sterowniki napisane przez społeczność. Prawdziwym wyzwaniem jest borrow checker w źle zaprojektowanych projektach – struktura <code>Peripherals</code> może być pożyczona tylko raz, co może prowadzić do problemów przy dokładaniu kolejnych modułów. Czas kompilacji i wgrywania na płytkę może być znaczny ze względu na rozmiar binarki. Dlatego polecam testować grafikę na komputerze, korzystając z symulatora biblioteki <a href="https://github.com/embedded-graphics/simulator">embedded-graphics</a>, co przyspiesza testowanie własnej funkcjonalności.</p>
+<h2 id="slowem-podsumowania"><a class="header-anchor no-hover-padding" href="#slowem-podsumowania" aria-label="Anchor link for: slowem-podsumowania"><span class="link-icon" aria-hidden="true"></span></a>
+Słowem podsumowania</h2>
+<p>Zainteresowanie Rust w społeczności systemów wbudowanych rośnie z roku na rok. Rosnąca liczba bibliotek, narzędzi i platform wspiera dalszy rozwój ekosystemu. Korzyści oferowane przez Rust, takie jak bezpieczeństwo pamięci, bezpieczna współbieżność i przyjazna składnia mogą znacznie poprawić doświadczenie dewelopera (ang. Developer Experience) w porównaniu z tradycyjnymi językami. Rust rzeczywiście coraz bardziej staje się realną alternatywą dla systemów wbudowanych.</p>
+
+        </section>
+
+        
+        
+        
+
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+            
+            
+            
+
+            
+        
+        
+
+    </article>
+</main>
+
+    <div id="button-container">
+        
+        
+            <div id="toc-floating-container">
+                <input type="checkbox" id="toc-toggle" class="toggle"/>
+                <label for="toc-toggle" class="overlay"></label>
+                <label for="toc-toggle" id="toc-button" class="button" title="Przełącz spis treść">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M414.82-193.094q-18.044 0-30.497-12.32-12.453-12.319-12.453-30.036t12.453-30.086q12.453-12.37 30.497-12.37h392.767q17.237 0 29.927 12.487 12.69 12.486 12.69 30.203 0 17.716-12.69 29.919t-29.927 12.203H414.82Zm0-244.833q-18.044 0-30.497-12.487Q371.87-462.9 371.87-480.45t12.453-29.92q12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.511 12.69 12.512 12.69 29.845 0 17.716-12.69 30.086-12.69 12.37-29.927 12.37H414.82Zm0-245.167q-18.044 0-30.497-12.32t-12.453-30.037q0-17.716 12.453-30.086 12.453-12.369 30.497-12.369h392.767q17.237 0 29.927 12.486 12.69 12.487 12.69 30.203 0 17.717-12.69 29.92-12.69 12.203-29.927 12.203H414.82ZM189.379-156.681q-32.652 0-55.878-22.829t-23.226-55.731q0-32.549 23.15-55.647 23.151-23.097 55.95-23.097 32.799 0 55.313 23.484 22.515 23.484 22.515 56.246 0 32.212-22.861 54.893-22.861 22.681-54.963 22.681Zm0-245.167q-32.652 0-55.878-23.134-23.226-23.135-23.226-55.623 0-32.487 23.467-55.517t56.12-23.03q32.102 0 54.721 23.288 22.62 23.288 22.62 55.775 0 32.488-22.861 55.364-22.861 22.877-54.963 22.877Zm-.82-244.833q-32.224 0-55.254-23.288-23.03-23.289-23.03-55.623 0-32.333 23.271-55.364 23.272-23.03 55.495-23.03 32.224 0 55.193 23.288 22.969 23.289 22.969 55.622 0 32.334-23.21 55.364-23.21 23.031-55.434 23.031Z"/></svg>
+                </label>
+                <div class="toc-content">
+                    
+
+<div class="toc-container">
+    
+
+    <ul>
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#co-to-systemy-wbudowane">Co to systemy wbudowane?</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#platformy-klucz-do-rozwiazania-problemu">Platformy – klucz do rozwiązania problemu</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#dostepnosc-bibliotek-dla-poszczegolnych-platform">Dostępność bibliotek dla poszczególnych platform</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#biblioteki-dla-popularnych-komponentow">Biblioteki dla popularnych komponentów</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#roznice-miedzy-trybami-std-i-no-std">Różnice między trybami std i no-std</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#zalety-i-wady-korzystania-z-rust">Zalety i wady korzystania z Rust</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#porownanie-kodu-c-i-rust">Porównanie kodu C++ i Rust</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#moje-doswiadczenia">Moje doświadczenia</a>
+                    
+                </li>
+            
+        
+            
+            
+                <li><a href="https://rust-lab-pjatk.github.io/blog/embeded-w-rust-dlugoterminowa-inwestycja-czy-moda/#slowem-podsumowania">Słowem podsumowania</a>
+                    
+                </li>
+            
+        
+    </ul>
+</div>
+
+
+                </div>
+            </div>
+        
+
+        
+        
+
+        
+        <a href="#" id="top-button" class="no-hover-padding" title="Przejdź na początek strony">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z"/></svg>
+        </a>
+    </div>
+
+
+<link rel="stylesheet" href="https://rust-lab-pjatk.github.io/katex.min.css">
+    <script defer src="https://rust-lab-pjatk.github.io/js/katex.min.js"></script><script defer src="https://rust-lab-pjatk.github.io/js/mermaid.min.js"></script><span id="copy-success" class="hidden">
+        Skopiowano!
+    </span>
+    <span id="copy-init" class="hidden">
+        Skopiuj kod do schowka
+    </span>
+    <script defer src="https://rust-lab-pjatk.github.io/js/copyCodeToClipboard.min.js"></script>
+
+
+    </div>
+    <footer>
+    <section>
+        <nav class="socials nav-navs"><ul>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="mailto:rustlab@pjwstk.edu.pl">
+                                    <img loading="lazy" alt="email" title="email" src="https://rust-lab-pjatk.github.io/social_icons/email.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://github.com/Rust-Lab-PJATK">
+                                    <img loading="lazy" alt="github" title="github" src="https://rust-lab-pjatk.github.io/social_icons/github.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.linkedin.com/company/rust-lab-pjatk">
+                                    <img loading="lazy" alt="linkedin" title="linkedin" src="https://rust-lab-pjatk.github.io/social_icons/linkedin.svg">
+                                </a>
+                            </li>
+                        
+                            <li>
+                                <a class="nav-links no-hover-padding social" rel=" me"  href="https://www.instagram.com/rustlabpjatk">
+                                    <img loading="lazy" alt="instagram" title="instagram" src="https://rust-lab-pjatk.github.io/social_icons/instagram.svg">
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            
+        </nav>
+
+        
+        <nav class="nav-navs">
+        </nav>
+
+        <div class="credits">
+            <small>
+                
+    
+    
+    
+    
+        
+    
+        
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    <p><p>© 2026 Rust Lab PJATK • Materiały na tej stronie są udostępniane na licencji <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>.</p>
+</p>
+
+                
+                Strona oparta na oprogramowaniu
+                <a rel=""  href="https://www.getzola.org">Zola</a>
+                i
+                <a rel=""  href="https://github.com/welpo/tabi">tabi</a>
+
+                </small>
+        </div>
+    </section>
+
+    </footer>
+
+</body>
+
+</html>
