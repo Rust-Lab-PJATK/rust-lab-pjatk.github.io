@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "http://localhost"
+base_url = "https://rustlab.pja.edu.pl"
 title = "Rust Lab PJATK"
 theme = "tabi"
 default_language = "pl"

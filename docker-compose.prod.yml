@@ -1,0 +1,14 @@
+version: "3.9"
+name: rustlab-page
+services:
+  www:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ZOLA_CONFIG: ${ZOLA_CONFIG:-config.pjatk.toml}
+    image: rustlab-page:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
